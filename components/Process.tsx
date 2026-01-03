@@ -30,7 +30,7 @@ const Process: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-[#F4CF6F] font-semibold tracking-widest uppercase text-xs mb-2 block">How We Work</span>
-          <h2 className="font-heading font-semibold text-3xl sm:text-4xl tracking-tight">Our Professional Process</h2>
+          <h2 className="font-heading font-semibold text-xl sm:text-2xl tracking-tight">Our Professional Process</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

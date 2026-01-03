@@ -133,12 +133,12 @@ const INDUSTRIES_DATA = [
 
 const FULL_SERVICES = [
   { id: 'coatings', title: 'KAVY COATINGS', icon: <Paintbrush size={18} />, img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&w=800' },
-  { id: 'design', title: 'KAVY DESIGN', icon: <Scan size={18} />, img: 'https://images.unsplash.com/photo-1581291417006-03e3871f328f?auto=format&w=800' },
+  { id: 'design', title: 'KAVY DESIGN', icon: <Scan size={18} />, img: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&w=800' },
   { id: 'spaces', title: 'KAVY SPACES', icon: <Layout size={18} />, img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800' },
-  { id: 'infrastructure', title: 'KAVY INFRASTRUCTURE', icon: <HardHat size={18} />, img: 'https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800' },
+  { id: 'infrastructure', title: 'KAVY INFRASTRUCTURE', icon: <HardHat size={18} />, img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=800' },
   { id: 'maintenance', title: 'KAVY MAINTENANCE', icon: <Settings size={18} />, img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800' },
-  { id: 'manufacturing', title: 'KAVY MANUFACTURING', icon: <Factory size={18} />, img: 'https://images.unsplash.com/photo-1530124560676-41bc1275d4d4?auto=format&w=800' },
-  { id: 'systems', title: 'KAVY SYSTEMS', icon: <Cpu size={18} />, img: 'https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&w=800' }
+  { id: 'manufacturing', title: 'KAVY MANUFACTURING', icon: <Factory size={18} />, img: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&w=800' },
+  { id: 'systems', title: 'KAVY SYSTEMS', icon: <Cpu size={18} />, img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&w=800' }
 ];
 
 const App: React.FC = () => {
@@ -479,7 +479,7 @@ const HeroSection = ({ id, onAction }: any) => (
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="inline-flex px-6 py-2 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-12 border border-white/20">
         Integrating Intelligence Across Africa
       </motion.div>
-      <motion.h2 initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} className="font-heading font-black text-6xl md:text-9xl tracking-tighter leading-[0.85] mb-12 uppercase italic text-white">
+      <motion.h2 initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} className="font-heading font-black text-5xl md:text-8xl tracking-tighter leading-[0.85] mb-12 uppercase italic text-white">
         REDEFINING <br /> <span className="lemon-gradient-text italic">INTELLIGENT</span> <br /> ENVIRONMENTS.
       </motion.h2>
       <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-slate-400 text-lg md:text-2xl font-light italic mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -494,12 +494,12 @@ const HeroSection = ({ id, onAction }: any) => (
 );
 
 const VisionSummarySection = ({ id, onAction }: any) => (
-  <section id={id} className="min-h-screen bg-[#f5f5f7] flex items-center justify-center py-32 md:py-48 px-6 overflow-hidden">
+  <section id={id} className="min-h-screen bg-[#f5f5f7] flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
       <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-12 order-2 lg:order-1">
         <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-6 py-3 bg-black rounded-lg inline-block italic">About Kavy</span>
-        <h3 className="font-heading text-5xl md:text-8xl font-black tracking-tight leading-none uppercase italic">BUILT-ENVIRONMENT <br /> SYSTEMS.</h3>
-        <p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed italic">KAVY is not a painting company. KAVY is a built-environment systems company designed to redefine how Africa protects and maintains its physical assets.</p>
+        <h3 className="font-heading text-4xl md:text-7xl font-black tracking-tight leading-none uppercase italic">BUILT-ENVIRONMENT <br /> SYSTEMS.</h3>
+        <p className="text-slate-500 text-xl md:text-1xl font-light leading-relaxed italic">KAVY is not a painting company. KAVY is a built-environment systems company designed to redefine how Africa protects and maintains its physical assets.</p>
         <div className="grid grid-cols-2 gap-6">
            {['Visionary Story', 'Mission Control', 'Core Values', 'Leadership'].map(v => (
              <div key={v} className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-slate-400"><CheckCircle2 size={16} className="text-[#ccff00]" /> {v}</div>
@@ -508,31 +508,31 @@ const VisionSummarySection = ({ id, onAction }: any) => (
         <button onClick={onAction} className="group flex items-center gap-4 text-sm font-black uppercase tracking-[0.2em] hover:text-[#ccff00] transition-colors italic border-b-2 border-black pb-2 w-fit">Access Full Company DNA <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></button>
       </motion.div>
       <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="relative order-1 lg:order-2">
-        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=1200" alt="Vision" className="rounded-[60px] shadow-3xl object-cover h-[400px] md:h-[700px] w-full" />
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=1200" alt="Vision" className="rounded-[60px] shadow-3xl object-cover h-[300px] md:h-[700px] w-4/5 mx-auto" />
       </motion.div>
     </div>
   </section>
 );
 
 const DivisionsGridSection = ({ id, onAction }: any) => (
-  <section id={id} className="min-h-screen bg-white flex flex-col justify-center py-32 md:py-48 px-6 overflow-hidden">
+  <section id={id} className="min-h-screen bg-white flex flex-col justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full mx-auto">
       <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
-          <h3 className="font-heading text-5xl lg:text-8xl font-black tracking-tighter uppercase italic">7 CORE DIVISIONS</h3>
+          <h3 className="font-heading text-5xl lg:text-6xl font-black tracking-tighter uppercase italic">7 CORE DIVISIONS</h3>
           <p className="text-slate-400 font-medium uppercase text-[10px] tracking-widest mt-4 italic underline decoration-[#ccff00] decoration-4 underline-offset-8">Engineering for the Asset Lifecycle</p>
         </motion.div>
         <button onClick={onAction} className="px-10 py-5 bg-black text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-[#ccff00] hover:text-black transition-all shadow-xl italic">Capability Matrix</button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {FULL_SERVICES.map((serv, i) => (
-          <motion.div key={serv.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} whileHover={{ y: -10 }} className="group relative p-10 bg-[#f5f5f7] rounded-[50px] border border-transparent hover:border-black transition-all cursor-pointer h-[300px] md:h-[350px] flex flex-col justify-between shadow-sm overflow-hidden">
+          <motion.div key={serv.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} whileHover={{ y: -10 }} className="group relative p-10 bg-[#f5f5f7] rounded-[50px] border-2 border-[#ccff00] hover:border-black transition-all cursor-pointer h-[300px] md:h-[350px] flex flex-col justify-between shadow-sm overflow-hidden">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity"><img src={serv.img} className="w-full h-full object-cover" alt={serv.title} /></div>
             <div className="relative z-10 flex flex-col">
               <div className="p-5 bg-white rounded-2xl w-fit mb-6 group-hover:bg-[#ccff00] transition-colors shadow-sm">{serv.icon}</div>
               <h4 className="font-heading text-2xl font-black italic">{serv.title}</h4>
             </div>
-            <div className="relative z-10 text-[9px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 flex items-center gap-2">Explore System <ChevronRight size={12}/></div>
+            <button onClick={() => document.getElementById('services')?.scrollIntoView({behavior:'smooth'})} className="relative z-10 text-[9px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 flex items-center gap-2 bg-transparent border-none cursor-pointer hover:text-[#ccff00] transition-colors">Explore System <ChevronRight size={12}/></button>
           </motion.div>
         ))}
       </div>
@@ -541,12 +541,12 @@ const DivisionsGridSection = ({ id, onAction }: any) => (
 );
 
 const TechnologyTeaserSection = ({ id, onAction }: any) => (
-  <section id={id} className="min-h-screen bg-black text-white flex items-center justify-center py-32 md:py-48 px-6 overflow-hidden relative">
+  <section id={id} className="min-h-screen bg-black text-white flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden relative">
     <div className="absolute inset-0 opacity-20 pointer-events-none blur-3xl"><div className="w-[800px] h-[800px] bg-[#ccff00]/20 rounded-full absolute -top-40 -left-40 animate-pulse"></div></div>
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center relative z-10">
       <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-12">
         <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-6 py-3 bg-white/10 rounded-lg inline-block italic">The Intel Layer</span>
-        <h3 className="font-heading text-5xl md:text-8xl font-black tracking-tight leading-none uppercase italic">DIGITAL <br /> INFRASTRUCTURE <br /> <span className="text-[#ccff00]">OS.</span></h3>
+        <h3 className="font-heading text-5xl md:text-6xl font-black tracking-tight leading-none uppercase italic">DIGITAL <br /> INFRASTRUCTURE <br /> <span className="text-[#ccff00]">OS.</span></h3>
         <p className="text-slate-400 text-xl md:text-2xl font-light leading-relaxed italic">KAVY’s technology platform transforms physical spaces into data-driven, intelligent assets via AI and IoT.</p>
         <div className="flex flex-col gap-6">
            {['AI-Assisted Visualization', 'Predictive Asset Monitoring', 'Real-time Health Dashboards'].map((t,i) => (
@@ -557,10 +557,10 @@ const TechnologyTeaserSection = ({ id, onAction }: any) => (
         </div>
         <button onClick={onAction} className="px-12 py-6 bg-[#ccff00] text-black rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-white transition-all shadow-xl italic">Explore Technology</button>
       </motion.div>
-      <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative rounded-[80px] overflow-hidden h-[400px] md:h-[700px] shadow-3xl border border-white/10">
-         <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&w=1200" className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-1000" alt="Tech" />
+      <motion.div initial={{ opacity: 0, scale: 0.9, y: 50 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} whileHover={{ scale: 1.02 }} className="relative rounded-[80px] overflow-hidden h-[400px] md:h-[700px] shadow-3xl border border-white/10 group">
+         <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&w=1200" className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000" alt="Tech" />
          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-12 flex flex-col justify-end">
-            <h4 className="text-[#ccff00] font-heading text-4xl font-black italic">INTELLIGENCE V2.4</h4>
+            <motion.h4 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }} className="text-[#ccff00] font-heading text-4xl font-black italic">INTELLIGENCE V2.4</motion.h4>
          </div>
       </motion.div>
     </div>
@@ -568,16 +568,16 @@ const TechnologyTeaserSection = ({ id, onAction }: any) => (
 );
 
 const IndustriesSummarySection = ({ id, onAction }: any) => (
-  <section id={id} className="min-h-screen bg-[#1d1d1f] text-white flex items-center justify-center py-32 md:py-48 px-6 overflow-hidden">
+  <section id={id} className="min-h-screen bg-[#1d1d1f] text-white flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center relative z-10">
       <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative rounded-[80px] overflow-hidden h-[400px] md:h-[750px] shadow-3xl order-2 lg:order-1">
-         <img src="https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=1200" className="w-full h-full object-cover grayscale opacity-60" alt="Industries" />
+         <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&w=1400&q=80" className="w-full h-full object-cover grayscale opacity-60" alt="Industries" />
          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex flex-col justify-end p-16"><h4 className="text-[#ccff00] font-heading text-4xl md:text-5xl font-black italic mb-2">ASSET CLASSES</h4></div>
       </motion.div>
       <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-12 order-1 lg:order-2">
         <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-6 py-3 bg-white/10 rounded-lg inline-block italic border border-white/10">Strategic Verticals</span>
-        <h3 className="font-heading text-5xl md:text-8xl font-black tracking-tight leading-none uppercase italic">INTELLIGENCE <br /> FOR EVERY <br /> <span className="text-[#ccff00]">SECTOR.</span></h3>
-        <p className="text-slate-400 text-xl md:text-2xl font-light leading-relaxed italic">KAVY delivers end-to-end lifecycle solutions tailored to the unique requirements of each industry.</p>
+        <h3 className="font-heading text-5xl md:text-6xl font-black tracking-tight leading-none uppercase italic">INTELLIGENCE <br /> FOR EVERY <br /> <span className="text-[#ccff00]">SECTOR.</span></h3>
+        <p className="text-slate-400 text-xl md:text-1xl font-light leading-relaxed italic">KAVY delivers end-to-end lifecycle solutions tailored to the unique requirements of each industry.</p>
         <button onClick={onAction} className="px-12 py-6 bg-[#ccff00] text-black rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-white transition-all shadow-xl italic">Market Sector Insights</button>
       </motion.div>
     </div>
@@ -585,18 +585,18 @@ const IndustriesSummarySection = ({ id, onAction }: any) => (
 );
 
 const HomePortfolioSection = ({ id, onAction }: any) => (
-  <section id={id} className="min-h-screen bg-[#f5f5f7] flex items-center justify-center py-32 md:py-48 px-6 overflow-hidden">
+  <section id={id} className="bg-[#f5f5f7] flex items-center justify-center py-8 md:py-12 px-6 overflow-hidden">
     <div className="max-w-7xl w-full">
-      <div className="mb-24 text-center"><h3 className="font-heading text-5xl lg:text-9xl font-black tracking-tighter uppercase italic">PORTFOLIO <br /> OF IMPACT.</h3></div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="mb-6 text-center"><h3 className="font-heading text-5xl lg:text-7xl font-black tracking-tighter uppercase italic">PORTFOLIO <br /> OF IMPACT.</h3></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
           { title: 'Lagos Smart City', cat: 'SPACES', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=800' },
           { title: 'Lifecycle AI Hub', cat: 'SYSTEMS', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&w=800' },
-          { title: 'International Port', cat: 'COATINGS', img: 'https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800' }
+          { title: 'Painted House', cat: 'COATINGS', img: '/images/h3.jpeg' }
         ].map((item, i) => (
-          <motion.div key={i} onClick={onAction} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="group relative h-[400px] md:h-[600px] rounded-[70px] overflow-hidden bg-white shadow-3xl cursor-pointer">
+          <motion.div key={i} onClick={onAction} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="group relative h-[300px] md:h-[420px] rounded-[70px] overflow-hidden bg-white shadow-3xl cursor-pointer">
             <img src={item.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={item.title} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent p-16 flex flex-col justify-end">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent p-8 flex flex-col justify-end">
               <span className="text-[#ccff00] font-black text-[11px] uppercase tracking-widest mb-4 italic">Case Study 0{i+1}</span>
               <h4 className="text-white font-heading text-4xl font-bold italic mb-4">{item.title}</h4>
               <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.3em]">{item.cat} DIVISION</p>
@@ -604,7 +604,7 @@ const HomePortfolioSection = ({ id, onAction }: any) => (
           </motion.div>
         ))}
       </div>
-      <div className="mt-20 text-center">
+      <div className="mt-8 text-center">
         <button onClick={onAction} className="px-12 py-6 bg-black text-white rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-[#ccff00] hover:text-black transition-all italic flex items-center gap-3 mx-auto shadow-2xl">Access Full Impact Registry <ArrowRight size={18} /></button>
       </div>
     </div>
@@ -612,19 +612,19 @@ const HomePortfolioSection = ({ id, onAction }: any) => (
 );
 
 const HomeReviewsSection = () => (
-  <section className="bg-white py-32 md:py-48 px-6 overflow-hidden border-t border-slate-100">
+  <section className="bg-white py-16 md:py-24 px-6 overflow-hidden border-t border-slate-100">
     <div className="max-w-7xl w-full mx-auto">
-      <div className="text-center mb-24 uppercase italic"><h3 className="font-heading text-5xl lg:text-9xl font-black tracking-tighter italic">THE NETWORK.</h3></div>
+      <div className="text-center mb-24 uppercase italic"><h3 className="font-heading text-5xl lg:text-7xl font-black tracking-tighter italic">THE NETWORK.</h3></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
         {[
           { text: "KAVY LTD redefined our logistics facility coatings. Their tech-first approach is unmatched.", author: "Dr. Adebayo", org: "Logistics Hub" },
           { text: "The KAVY SPACES division transformed our headquarters into a high-productivity environment.", author: "Sarah J.", org: "Tech Corp" },
           { text: "KAVY is the future of building intelligence in Africa. Engineering meets software.", author: "Engineer Koffi", org: "Public Works Bureau" }
         ].map((rev, i) => (
-          <motion.div key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="p-16 bg-[#f5f5f7] rounded-[70px] hover:bg-black group transition-all duration-500 border border-transparent hover:border-[#ccff00]/20">
-            <div className="mb-10 flex gap-1.5"><Sparkles size={16} className="text-[#ccff00]" /></div>
-            <p className="text-slate-600 font-light italic text-2xl leading-relaxed mb-12 group-hover:text-slate-300 transition-colors">"{rev.text}"</p>
-            <div className="space-y-2"><h5 className="font-black text-lg group-hover:text-[#ccff00] transition-colors uppercase italic">{rev.author}</h5><p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{rev.org}</p></div>
+          <motion.div key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="p-8 bg-[#f5f5f7] rounded-[40px] hover:bg-black group transition-all duration-500 border-2 border-[#ccff00]/10 hover:border-[#ccff00]">
+            <div className="mb-6 flex gap-1"><Sparkles size={16} className="text-[#ccff00]" /></div>
+            <p className="text-slate-600 font-light italic text-lg leading-relaxed mb-6 group-hover:text-slate-300 transition-colors">"{rev.text}"</p>
+            <div className="space-y-1"><h5 className="font-black text-lg group-hover:text-[#ccff00] transition-colors uppercase italic">{rev.author}</h5><p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{rev.org}</p></div>
           </motion.div>
         ))}
       </div>
@@ -633,35 +633,33 @@ const HomeReviewsSection = () => (
 );
 
 const ContactSection = ({ id }: any) => (
-  <section id={id} className="min-h-screen bg-black text-white flex flex-col justify-center py-32 md:py-48 px-6 relative overflow-hidden">
-    <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
-      <div className="space-y-16">
-        <h3 className="font-heading text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase italic"><span className="text-[#ccff00]">STRATEGIC</span> <br /> BRIEFING.</h3>
-        <p className="text-slate-500 text-xl md:text-3xl font-light italic max-w-xl leading-snug">Global reach. African excellence. Initiate a mission brief with our architects.</p>
-        <div className="flex items-center gap-8 p-8 bg-white/5 rounded-[40px] border border-white/10 group hover:border-[#ccff00] transition-all w-fit"><div className="p-5 bg-[#ccff00] text-black rounded-2xl group-hover:scale-110 transition-transform"><Phone size={28} /></div><div><p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-500 italic mb-1">Executive Line</p><p className="text-2xl md:text-3xl font-black italic">+234 814 413 0329</p></div></div>
+  <section id={id} className="bg-black text-white flex flex-col justify-center py-8 md:py-12 px-6 relative overflow-hidden">
+    <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+      <div className="space-y-8">
+        <h3 className="font-heading text-4xl lg:text-6xl font-black tracking-tighter leading-[0.8] uppercase italic"><span className="text-[#ccff00]">STRATEGIC</span> <br /> BRIEFING.</h3>
+        <p className="text-slate-500 text-sm md:text-lg font-light italic max-w-xl leading-snug">Global reach. African excellence. Initiate a mission brief with our architects.</p>
+        <div className="flex items-center gap-4 p-4 bg-white/5 rounded-[30px] border border-white/10 group hover:border-[#ccff00] transition-all w-fit"><div className="p-3 bg-[#ccff00] text-black rounded-2xl group-hover:scale-110 transition-transform"><Phone size={20} /></div><div><p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 italic mb-1">Executive Line</p><p className="text-lg md:text-xl font-black italic">+234 814 413 0329</p></div></div>
       </div>
-      <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white p-12 md:p-20 rounded-[80px] shadow-3xl text-black">
-        <h4 className="font-heading text-3xl md:text-5xl font-black mb-12 uppercase italic underline decoration-[#ccff00] decoration-8 underline-offset-8">Mission Portal</h4>
-        <form className="space-y-8"><div className="space-y-2"><label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Strategic Email</label><input type="email" className="w-full bg-[#f5f5f7] rounded-[30px] p-8 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="INTEL@DOMAIN.COM" /></div><div className="space-y-2"><label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Objective Summary</label><textarea rows={3} className="w-full bg-[#f5f5f7] rounded-[30px] p-8 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="BRIEF_SYNOPSIS"></textarea></div><button className="w-full py-10 bg-[#ccff00] text-black font-black uppercase tracking-[0.5em] text-sm rounded-[30px] hover:bg-black hover:text-[#ccff00] transition-all shadow-2xl italic">Transmit Brief</button></form>
+      <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white p-6 md:p-12 rounded-[50px] shadow-3xl text-black">
+        <h4 className="font-heading text-2xl md:text-3xl font-black mb-6 uppercase italic underline decoration-[#ccff00] decoration-4 underline-offset-4">Mission Portal</h4>
+        <form className="space-y-4"><div className="space-y-1"><label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Strategic Email</label><input type="email" className="w-full bg-[#f5f5f7] rounded-[20px] p-4 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="INTEL@DOMAIN.COM" /></div><div className="space-y-1"><label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Objective Summary</label><textarea rows={2} className="w-full bg-[#f5f5f7] rounded-[20px] p-4 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="BRIEF_SYNOPSIS"></textarea></div><button className="w-full py-4 bg-[#ccff00] text-black font-black uppercase tracking-[0.4em] text-xs rounded-[20px] hover:bg-black hover:text-[#ccff00] transition-all shadow-2xl italic">Transmit Brief</button></form>
       </motion.div>
     </div>
   </section>
 );
 
 const Footer = () => (
-  <footer className="bg-slate-200 text-slate-600 py-32 md:py-48 px-6 border-t border-slate-300 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-24">
-      <div className="space-y-8 max-w-md">
-        <div className="flex items-center gap-6"><KavyLogo className="w-12 h-12 text-black" /><span className="font-heading font-black text-black text-3xl tracking-tighter uppercase italic">KAVY LTD</span></div>
-        <p className="text-sm font-medium leading-relaxed uppercase tracking-[0.2em] text-slate-500 italic">Integrating spaces, infrastructure, and technology across the African continent through built-environment intelligence.</p>
-        <div className="flex gap-6">{[[Linkedin, '#'], [Facebook, '#'], [Instagram, '#']].map(([Icon, link]: any, i) => (<a key={i} href={link} className="p-4 bg-white rounded-full hover:bg-black hover:text-[#ccff00] shadow-md transition-all"><Icon size={20} /></a>))}</div>
+  <footer className="bg-slate-200 text-slate-600 py-8 md:py-12 px-6 border-t border-slate-300 relative z-10 overflow-hidden">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="space-y-4">
+        <div className="flex items-center gap-3"><KavyLogo className="w-10 h-10 text-black" /><span className="font-heading font-black text-black text-2xl tracking-tighter uppercase italic">KAVY LTD</span></div>
+        <p className="text-xs font-medium leading-relaxed uppercase tracking-[0.1em] text-slate-500 italic">Integrating spaces, infrastructure, and technology across Africa.</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-32 text-[11px] font-black uppercase tracking-widest italic">
-        <div className="space-y-6 text-slate-500"><p className="text-black text-xs">Primary Operations</p><p className="flex items-center gap-3 font-bold italic"><MapPin size={14} className="text-black" /> Lagos HQ, Nigeria</p><p className="flex items-center gap-3 font-bold italic"><Phone size={14} className="text-black" /> +234 814 413 0329</p></div>
-        <div className="space-y-6 text-slate-500"><p className="text-black text-xs">Strategic Governance</p><a href="#" className="block hover:text-black transition-colors italic border-b border-transparent hover:border-black w-fit pb-1">Safety Protocols</a><a href="#" className="block hover:text-black transition-colors italic border-b border-transparent hover:border-black w-fit pb-1">Privacy Architecture</a></div>
-      </div>
+      <div className="space-y-3 text-slate-500"><p className="text-black text-xs font-black">Primary Operations</p><p className="flex items-center gap-2 font-bold italic text-xs"><MapPin size={12} className="text-black" /> Lagos HQ, Nigeria</p><p className="flex items-center gap-2 font-bold italic text-xs"><Phone size={12} className="text-black" /> +234 814 413 0329</p></div>
+      <div className="space-y-3 text-slate-500"><p className="text-black text-xs font-black">Strategic Governance</p><a href="#" className="block hover:text-black transition-colors italic text-xs border-b border-transparent hover:border-black w-fit pb-1">Safety Protocols</a><a href="#" className="block hover:text-black transition-colors italic text-xs border-b border-transparent hover:border-black w-fit pb-1">Privacy Architecture</a></div>
+      <div className="space-y-3"><p className="text-black text-xs font-black">Connect</p><div className="flex gap-3">{[[Linkedin, '#'], [Facebook, '#'], [Instagram, '#']].map(([Icon, link]: any, i) => (<a key={i} href={link} className="p-2 bg-white rounded-full hover:bg-black hover:text-[#ccff00] shadow-md transition-all"><Icon size={14} /></a>))}</div></div>
     </div>
-    <div className="max-w-7xl mx-auto mt-32 pt-16 border-t border-slate-300 flex flex-col md:flex-row justify-between items-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 gap-8 italic">
+    <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-300 text-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 italic">
       <p>© 2024 KAVY LTD. SYSTEMS NOMINAL • REGIONAL SCALE SECURED.</p>
     </div>
   </footer>
@@ -676,13 +674,13 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
         <div className="max-w-7xl mx-auto relative z-10"><motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}><span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">Systemic Built Environments</span><h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase">INTELLIGENCE <br /> <span className="text-white/20 italic">BEYOND</span> <br /> SURFACES.</h2><p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">KAVY is not a painting company. KAVY is a built-environment systems company designed to redefine how Africa protects and maintains its physical assets.</p></motion.div></div>
       </section>
 
-      <section id="about-story" className="py-48 md:py-72 px-8 lg:px-24 overflow-hidden border-b border-slate-100 scroll-mt-24"><div className="max-w-7xl mx-auto"><div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100 }} viewport={{ once: true }} className="space-y-16"><div className="flex items-center gap-6 text-slate-400"><History size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">The Genesis</span></div><h3 className="font-heading text-5xl md:text-9xl font-black uppercase tracking-tight leading-none italic">WHY KAVY <br /> EXISTS.</h3><div className="p-12 bg-[#1d1d1f] text-white rounded-[70px] shadow-3xl relative overflow-hidden group"><img src="https://images.unsplash.com/photo-1541913054-21199a42d530?auto=format&w=800" className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-110 transition-transform duration-1000" alt="Problem" /><div className="relative z-10"><h4 className="text-[#ccff00] font-black uppercase text-xs tracking-[0.3em] mb-6">The Systemic Gap</h4><p className="text-slate-400 font-light text-lg md:text-xl leading-relaxed italic">Infrastructure deteriorates years early due to fragmented, labor-dependent maintenance. We saw an engineering problem, not a cosmetic one.</p></div></div></motion.div><motion.div whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.8 }} viewport={{ once: true }} className="relative"><div className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl group"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&w=1200" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Insight" /><div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-16"><p className="text-white text-3xl font-heading font-black tracking-tight leading-tight uppercase italic border-l-4 border-[#ccff00] pl-8">BEYOND THE <br /> COSMETIC LAYER.</p></div></div></motion.div></div></div></section>
+      <section id="about-story" className="py-24 md:py-32 px-8 lg:px-24 overflow-hidden border-b border-slate-100 scroll-mt-24"><div className="max-w-7xl mx-auto"><div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100 }} viewport={{ once: true }} className="space-y-16"><div className="flex items-center gap-6 text-slate-400"><History size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">The Genesis</span></div><h3 className="font-heading text-5xl md:text-9xl font-black uppercase tracking-tight leading-none italic">WHY KAVY <br /> EXISTS.</h3><div className="p-12 bg-[#1d1d1f] text-white rounded-[70px] shadow-3xl relative overflow-hidden group"><img src="https://images.unsplash.com/photo-1541913054-21199a42d530?auto=format&w=800" className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-110 transition-transform duration-1000" alt="Problem" /><div className="relative z-10"><h4 className="text-[#ccff00] font-black uppercase text-xs tracking-[0.3em] mb-6">The Systemic Gap</h4><p className="text-slate-400 font-light text-lg md:text-xl leading-relaxed italic">Infrastructure deteriorates years early due to fragmented, labor-dependent maintenance. We saw an engineering problem, not a cosmetic one.</p></div></div></motion.div><motion.div whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.8 }} viewport={{ once: true }} className="relative"><div className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl group"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&w=1200" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Insight" /><div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-16"><p className="text-white text-3xl font-heading font-black tracking-tight leading-tight uppercase italic border-l-4 border-[#ccff00] pl-8">BEYOND THE <br /> COSMETIC LAYER.</p></div></div></motion.div></div></div></section>
 
-      <section id="about-vision" className="py-48 md:py-72 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 100 }} viewport={{ once: true }} className="space-y-24 order-2 lg:order-1"><div className="space-y-10"><div className="flex items-center gap-6 text-[#ccff00] bg-black px-8 py-4 rounded-3xl w-fit shadow-2xl"><Eye size={24} /> <span className="font-black uppercase tracking-[0.3em] text-[11px]">The Vision</span></div><h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">AFRICA'S LEADING SYSTEMS UNICORN.</h3><p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed italic">To become Africa’s leading built-environment systems company, delivering intelligent solutions across residential, industrial, and public infrastructure.</p></div></motion.div><motion.div whileInView={{ scale: 1, opacity: 1 }} initial={{ scale: 0.9, opacity: 0 }} viewport={{ once: true }} className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl order-1 lg:order-2 group"><img src="https://images.unsplash.com/photo-1449156001934-19918c217523?auto=format&w=1200" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" alt="Future City" /><div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div></motion.div></div></section>
+      <section id="about-vision" className="py-24 md:py-32 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 100 }} viewport={{ once: true }} className="space-y-24 order-2 lg:order-1"><div className="space-y-10"><div className="flex items-center gap-6 text-[#ccff00] bg-black px-8 py-4 rounded-3xl w-fit shadow-2xl"><Eye size={24} /> <span className="font-black uppercase tracking-[0.3em] text-[11px]">The Vision</span></div><h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">AFRICA'S LEADING SYSTEMS UNICORN.</h3><p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed italic">To become Africa’s leading built-environment systems company, delivering intelligent solutions across residential, industrial, and public infrastructure.</p></div></motion.div><motion.div whileInView={{ scale: 1, opacity: 1 }} initial={{ scale: 0.9, opacity: 0 }} viewport={{ once: true }} className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl order-1 lg:order-2 group"><img src="https://images.unsplash.com/photo-1449156001934-19918c217523?auto=format&w=1200" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" alt="Future City" /><div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div></motion.div></div></section>
 
-      <section id="about-values" className="py-48 md:py-72 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto"><div className="text-center mb-32 space-y-10"><motion.span whileInView={{ opacity: 1 }} initial={{ opacity: 0 }} className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em] block">The Kavy Compass</motion.span><motion.h3 whileInView={{ y: 0, opacity: 1 }} initial={{ y: 50, opacity: 0 }} className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">CORE VALUES.</motion.h3></div><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">{[{ icon: <Workflow />, title: "Systems Thinking", desc: "We design connected solutions, not isolated services." }, { icon: <Award />, title: "Precision Engineering", desc: "Quality is engineered into every material and process." }, { icon: <Shield />, title: "Total Accountability", desc: "Traceable and measurable outcomes." }, { icon: <Zap />, title: "Purposeful Tech", desc: "Solving real problems through AI." }, { icon: <Leaf />, title: "Sustainability", desc: "Built responsibility and workforce growth." }].map((v, i) => (<motion.div key={i} whileInView={{ y: 0, opacity: 1 }} initial={{ y: 50, opacity: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-16 border-2 border-slate-100 rounded-[80px] hover:border-black hover:bg-black group transition-all duration-700 relative overflow-hidden"><div className="relative z-10 space-y-8"><div className="w-20 h-20 rounded-3xl bg-slate-50 text-black flex items-center justify-center group-hover:bg-[#ccff00] transition-all">{v.icon}</div><h4 className="font-black uppercase text-xl group-hover:text-white tracking-widest italic">{v.title}</h4><p className="text-lg text-slate-400 font-light italic leading-relaxed">{v.desc}</p></div></motion.div>))}</div></div></section>
+      <section id="about-values" className="py-24 md:py-32 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto"><div className="text-center mb-32 space-y-10"><motion.span whileInView={{ opacity: 1 }} initial={{ opacity: 0 }} className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em] block">The Kavy Compass</motion.span><motion.h3 whileInView={{ y: 0, opacity: 1 }} initial={{ y: 50, opacity: 0 }} className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">CORE VALUES.</motion.h3></div><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">{[{ icon: <Workflow />, title: "Systems Thinking", desc: "We design connected solutions, not isolated services." }, { icon: <Award />, title: "Precision Engineering", desc: "Quality is engineered into every material and process." }, { icon: <Shield />, title: "Total Accountability", desc: "Traceable and measurable outcomes." }, { icon: <Zap />, title: "Purposeful Tech", desc: "Solving real problems through AI." }, { icon: <Leaf />, title: "Sustainability", desc: "Built responsibility and workforce growth." }].map((v, i) => (<motion.div key={i} whileInView={{ y: 0, opacity: 1 }} initial={{ y: 50, opacity: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-16 border-2 border-slate-100 rounded-[80px] hover:border-black hover:bg-black group transition-all duration-700 relative overflow-hidden"><div className="relative z-10 space-y-8"><div className="w-20 h-20 rounded-3xl bg-slate-50 text-black flex items-center justify-center group-hover:bg-[#ccff00] transition-all">{v.icon}</div><h4 className="font-black uppercase text-xl group-hover:text-white tracking-widest italic">{v.title}</h4><p className="text-lg text-slate-400 font-light italic leading-relaxed">{v.desc}</p></div></motion.div>))}</div></div></section>
 
-      <section id="about-leadership" className="py-48 md:py-72 bg-black text-white px-8 lg:px-24 scroll-mt-24 overflow-hidden">
+      <section id="about-leadership" className="py-24 md:py-32 bg-black text-white px-8 lg:px-24 scroll-mt-24 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
             <div className="space-y-10">
@@ -713,7 +711,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
         </div>
       </section>
 
-      <section id="about-advantage" className="py-48 md:py-72 px-8 lg:px-24 scroll-mt-24 overflow-hidden border-b border-slate-100">
+      <section id="about-advantage" className="py-24 md:py-32 px-8 lg:px-24 scroll-mt-24 overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
              <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">THE EDGE.</h3>
@@ -738,7 +736,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
         </div>
       </section>
 
-      <section id="about-operating" className="py-48 md:py-72 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-32"><div className="lg:col-span-5 space-y-16"><h3 className="font-heading text-6xl md:text-9xl font-black uppercase tracking-tight leading-none italic">OPERATING <br /> MODEL.</h3><p className="text-slate-500 text-xl md:text-3xl font-light leading-relaxed italic">KAVY integrates the entire asset lifecycle: from digital design intelligence to vertically integrated manufacturing.</p></div><div className="lg:col-span-7 flex flex-col justify-center"><div className="grid grid-cols-1 md:grid-cols-2 gap-8">{[{ title: "Strategic Design", icon: <Scan />, desc: "Simulation and performance modeling." }, { title: "Integrated Materials", icon: <Microscope />, desc: "Engineering-grade specialty coatings." }, { title: "Standard Execution", icon: <HardHat />, desc: "Tech-enabled delivery via field teams." }, { title: "Digital Monitoring", icon: <Search />, desc: "IoT integration for real-time tracking." }].map((step, i) => (<motion.div key={i} whileInView={{ x: 0, opacity: 1 }} initial={{ x: 50, opacity: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-12 bg-white rounded-[60px] border border-slate-100 flex flex-col gap-8 group hover:shadow-3xl transition-all"><div className="p-6 bg-black text-[#ccff00] rounded-3xl w-fit group-hover:scale-110 transition-transform">{step.icon}</div><div className="space-y-4"><h4 className="font-black uppercase text-xl tracking-widest italic">{step.title}</h4><p className="text-lg text-slate-400 font-light italic leading-relaxed">{step.desc}</p></div></motion.div>))}</div></div></div></section>
+      <section id="about-operating" className="py-24 md:py-32 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-32"><div className="lg:col-span-5 space-y-16"><h3 className="font-heading text-6xl md:text-9xl font-black uppercase tracking-tight leading-none italic">OPERATING <br /> MODEL.</h3><p className="text-slate-500 text-xl md:text-3xl font-light leading-relaxed italic">KAVY integrates the entire asset lifecycle: from digital design intelligence to vertically integrated manufacturing.</p></div><div className="lg:col-span-7 flex flex-col justify-center"><div className="grid grid-cols-1 md:grid-cols-2 gap-8">{[{ title: "Strategic Design", icon: <Scan />, desc: "Simulation and performance modeling." }, { title: "Integrated Materials", icon: <Microscope />, desc: "Engineering-grade specialty coatings." }, { title: "Standard Execution", icon: <HardHat />, desc: "Tech-enabled delivery via field teams." }, { title: "Digital Monitoring", icon: <Search />, desc: "IoT integration for real-time tracking." }].map((step, i) => (<motion.div key={i} whileInView={{ x: 0, opacity: 1 }} initial={{ x: 50, opacity: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-12 bg-white rounded-[60px] border border-slate-100 flex flex-col gap-8 group hover:shadow-3xl transition-all"><div className="p-6 bg-black text-[#ccff00] rounded-3xl w-fit group-hover:scale-110 transition-transform">{step.icon}</div><div className="space-y-4"><h4 className="font-black uppercase text-xl tracking-widest italic">{step.title}</h4><p className="text-lg text-slate-400 font-light italic leading-relaxed">{step.desc}</p></div></motion.div>))}</div></div></div></section>
 
       <section className="py-48 flex flex-col items-center gap-16 text-center bg-[#f5f5f7]"><h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7]">PAN-AFRICAN <br /> <span className="text-[#ccff00] bg-black px-12 py-4">INTELLIGENCE.</span></h3><div className="flex flex-col sm:flex-row gap-10"><button onClick={onBack} className="px-16 py-8 bg-black text-white rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-[#ccff00] transition-all italic shadow-3xl">HQ Main Portal</button></div></section>
     </div>

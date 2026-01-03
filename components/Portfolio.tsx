@@ -41,7 +41,7 @@ const Portfolio: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
-            <h2 className="font-heading font-semibold text-3xl sm:text-4xl text-[#262E59] tracking-tight mb-2">Recent Projects</h2>
+            <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#262E59] tracking-tight mb-2">Recent Projects</h2>
             <p className="text-slate-500">Transforming properties across the greater Indianapolis area.</p>
           </div>
           <a href="#contact" className="hidden md:flex items-center text-[#B97802] font-semibold text-sm hover:text-[#262E59] transition-colors mt-4 md:mt-0">

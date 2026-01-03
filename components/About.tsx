@@ -8,7 +8,7 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <span className="text-gradient font-semibold tracking-widest uppercase text-xs mb-2 block">About KAVY LTD</span>
-            <h2 className="font-heading font-semibold text-3xl sm:text-4xl text-[#262E59] tracking-tight mb-6">Excellence in Every Brushstroke</h2>
+            <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#262E59] tracking-tight mb-6">Excellence in Every Brushstroke</h2>
             <div className="space-y-4 text-slate-500 leading-relaxed">
               <p>
                 At KAVY LTD, we believe that painting is more than just applying color—it's about protecting your investment and creating environments that inspire. Based in Indianapolis, we serve both commercial and residential clients with a commitment to quality that is unmatched in the industry.

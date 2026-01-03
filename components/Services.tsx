@@ -51,7 +51,7 @@ const Services: React.FC = () => {
     <section className="bg-slate-50 pt-24 pb-24" id="services">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-heading font-semibold text-3xl sm:text-4xl text-[#262E59] tracking-tight mb-4">Our Expertise</h2>
+          <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#262E59] tracking-tight mb-4">Our Expertise</h2>
           <p className="text-slate-500 leading-relaxed">Comprehensive painting and property maintenance solutions for commercial and residential clients across Indianapolis.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

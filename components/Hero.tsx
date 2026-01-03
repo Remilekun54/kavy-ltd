@@ -18,10 +18,10 @@ const Hero: React.FC = () => {
         <span className="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold tracking-widest uppercase mb-6">
           Serving Indianapolis & Surrounding Areas
         </span>
-        <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-7xl text-white tracking-tight mb-6 leading-tight">
+        <h1 className="font-heading font-semibold text-xl sm:text-2xl lg:text-3xl text-white tracking-tight mb-6 leading-tight">
           Professional Painting & <br className="hidden lg:block" /> Property Solutions
         </h1>
-        <p className="font-body text-lg sm:text-xl text-slate-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="font-body text-base sm:text-lg text-slate-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
           Reliable commercial and residential services delivered with precision, care, and professionalism. Elevate your property with Daru Solutions.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

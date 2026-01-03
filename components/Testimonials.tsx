@@ -47,7 +47,7 @@ const Testimonials: React.FC = () => {
     <section id="reviews" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-heading font-semibold text-3xl sm:text-4xl text-[#262E59] tracking-tight mb-4">Client Success Stories</h2>
+          <h2 className="font-heading font-semibold text-xl sm:text-2xl text-[#262E59] tracking-tight mb-4">Client Success Stories</h2>
           <p className="text-slate-500">Read what our clients have to say about their experience with KAVY LTD.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

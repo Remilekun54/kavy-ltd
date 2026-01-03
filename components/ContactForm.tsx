@@ -23,7 +23,7 @@ const ContactForm: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="text-white">
-            <h2 className="font-heading font-semibold text-4xl lg:text-5xl tracking-tight mb-6 leading-tight">Ready to Improve Your Property?</h2>
+            <h2 className="font-heading font-semibold text-xl sm:text-2xl lg:text-3xl tracking-tight mb-6 leading-tight">Ready to Improve Your Property?</h2>
             <p className="text-slate-300 text-lg mb-8 font-light">
               Contact KAVY LTD today. No pressure, just honest pricing and quality work for your next project in Indianapolis.
             </p>
