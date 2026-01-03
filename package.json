@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "npm run build && git add dist -f && git commit -m 'deploy' && git push origin $(git rev-parse --abbrev-ref HEAD):gh-pages"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.34.0",
