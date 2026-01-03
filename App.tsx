@@ -10,7 +10,8 @@ import {
   History, Eye, Shield, Award, HelpCircle, BriefcaseBusiness, TrendingDown, TrendingUp,
   Search, Workflow, Leaf, Lock, Handshake, Microscope, Landmark, Truck, Home,
   LineChart, Monitor, Terminal, Share2, Activity, DatabaseZap, ArrowRight,
-  Filter, Map as MapIcon, Calendar, Maximize2, ClipboardCheck, AlertTriangle, FileText, Scale
+  Filter, Map as MapIcon, Calendar, Maximize2, ClipboardCheck, AlertTriangle, FileText, Scale,
+  MessageSquare, Clock, UserCheck, Headset
 } from 'lucide-react';
 import AIConsultant from './components/AIConsultant';
 
@@ -33,39 +34,6 @@ const SECTIONS = [
   { id: 'industries-summary', label: 'Industry Focus', icon: <Building2 size={16} /> },
   { id: 'portfolio', label: 'Impact Log', icon: <Hexagon size={16} /> },
   { id: 'contact', label: 'Strategic Link', icon: <Phone size={16} /> }
-];
-
-const ABOUT_SUB_SECTIONS = [
-  { id: 'story', label: 'Our Story', icon: <History size={14} /> },
-  { id: 'vision', label: 'Vision & Mission', icon: <Eye size={14} /> },
-  { id: 'values', label: 'Core Values', icon: <Target size={14} /> },
-  { id: 'leadership', label: 'Leadership', icon: <Users size={14} /> },
-  { id: 'advantage', label: 'Advantage', icon: <Award size={14} /> },
-  { id: 'operating', label: 'Operating Model', icon: <Workflow size={14} /> }
-];
-
-const TECH_SUB_SECTIONS = [
-  { id: 'platform', label: 'KAVY Systems', icon: <Terminal size={14} /> },
-  { id: 'ai-design', label: 'AI Visualization', icon: <Scan size={14} /> },
-  { id: 'predictive', label: 'Predictive Intel', icon: <Activity size={14} /> },
-  { id: 'dashboards', label: 'Data Hubs', icon: <BarChart3 size={14} /> },
-  { id: 'lifecycle', label: 'Lifecycle CMS', icon: <Database size={14} /> }
-];
-
-const PORTFOLIO_SUB_SECTIONS = [
-  { id: 'featured', label: 'Flagship Projects', icon: <Award size={14} /> },
-  { id: 'before-after', label: 'Before & After', icon: <Layout size={14} /> },
-  { id: 'infrastructure', label: 'Infrastructure', icon: <HardHat size={14} /> },
-  { id: 'corporate-res', label: 'Corporate & Residential', icon: <Building2 size={14} /> },
-  { id: 'case-studies', label: 'Data Case Studies', icon: <LineChart size={14} /> }
-];
-
-const COMPLIANCE_SUB_SECTIONS = [
-  { id: 'qa-framework', label: 'QA Framework', icon: <ClipboardCheck size={14} /> },
-  { id: 'hse-policy', label: 'HSE Policy', icon: <ShieldCheck size={14} /> },
-  { id: 'certifications', label: 'Certifications', icon: <Award size={14} /> },
-  { id: 'regulations', label: 'Regulations', icon: <Scale size={14} /> },
-  { id: 'risk-management', label: 'Risk Intelligence', icon: <AlertTriangle size={14} /> }
 ];
 
 const INDUSTRIES_DATA = [
@@ -108,26 +76,6 @@ const INDUSTRIES_DATA = [
     image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&w=1200',
     services: ['Anti-corrosion', 'Industrial floors', 'Fire-retardant', 'Performance analytics'],
     example: 'Factory floor epoxy systems for heavy machinery.'
-  },
-  {
-    id: 'transport',
-    title: 'Infrastructure & Transport',
-    overview: 'Transport and infrastructure assets operate in harsh environments and must meet safety, durability, and reliability standards.',
-    problems: ['Environmental failure', 'Safety risks (faded markings)', 'Budget overruns', 'Limited lifecycle planning'],
-    solutions: ['Long-life systems', 'High-visibility markings', 'Preventive frameworks', 'Digital tracking'],
-    image: 'https://images.unsplash.com/photo-1473876637954-4b493d59fd97?auto=format&w=1200',
-    services: ['Bridge/Highway coatings', 'Traffic safety', 'Marine protection', 'Facility coatings'],
-    example: 'Bridge repainting with corrosion control systems.'
-  },
-  {
-    id: 'smartcities',
-    title: 'Smart Cities & Urban Development',
-    overview: 'Smart cities require integrated physical and digital systems to manage assets efficiently, sustainably, and transparently at scale.',
-    problems: ['Disconnected management', 'High costs', 'Lack of visibility', 'Sustainability pressure'],
-    solutions: ['Lifecycle platforms', 'AI monitoring', 'Integrated design', 'Sustainability materials'],
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&w=1200',
-    services: ['Smart surfaces', 'IoT monitoring', 'City dashboards', 'Predictive analytics'],
-    example: 'Smart urban district maintenance platform.'
   }
 ];
 
@@ -142,7 +90,7 @@ const FULL_SERVICES = [
 ];
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'services' | 'industries' | 'technology' | 'portfolio' | 'compliance'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'services' | 'industries' | 'technology' | 'portfolio' | 'compliance' | 'contact-page'>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [isHomeExpanded, setIsHomeExpanded] = useState(false);
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
@@ -151,6 +99,7 @@ const App: React.FC = () => {
   const [isTechExpanded, setIsTechExpanded] = useState(false);
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const [isComplianceExpanded, setIsComplianceExpanded] = useState(false);
+  const [isContactExpanded, setIsContactExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -173,54 +122,18 @@ const App: React.FC = () => {
     }, 100);
   };
 
-  const navigateToService = (id: string) => {
-    setCurrentView('services');
+  const navigateToSubSection = (view: any, subId: string) => {
+    setCurrentView(view);
     setTimeout(() => {
-      document.getElementById(`serv-${id}`)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToIndustry = (id: string) => {
-    setCurrentView('industries');
-    setTimeout(() => {
-      document.getElementById(`industry-${id}`)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToAboutSection = (sectionId: string) => {
-    setCurrentView('about');
-    setTimeout(() => {
-      const el = document.getElementById(`about-${sectionId}`);
-      el?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToTechSection = (sectionId: string) => {
-    setCurrentView('technology');
-    setTimeout(() => {
-      const el = document.getElementById(`tech-${sectionId}`);
-      el?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToPortfolioSection = (sectionId: string) => {
-    setCurrentView('portfolio');
-    setTimeout(() => {
-      const el = document.getElementById(`port-${sectionId}`);
-      el?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToComplianceSection = (sectionId: string) => {
-    setCurrentView('compliance');
-    setTimeout(() => {
-      const el = document.getElementById(`comp-${sectionId}`);
+      const prefixMap: any = { 'about': 'about', 'technology': 'tech', 'portfolio': 'port', 'compliance': 'comp', 'contact-page': 'cont' };
+      const el = document.getElementById(`${prefixMap[view]}-${subId}`);
       el?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
 
   return (
     <div className="relative h-screen w-full flex overflow-hidden bg-white text-[#1d1d1f]">
+      {/* Branding */}
       <div className="fixed top-8 left-8 z-[100] flex flex-col pointer-events-none">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-4">
           <KavyLogo className="w-10 h-10 text-black" />
@@ -236,13 +149,8 @@ const App: React.FC = () => {
         className={`relative bg-white transition-all duration-700 ease-in-out ${isMenuOpen ? 'w-full lg:w-[calc(100%-280px)]' : 'w-full'} h-full overflow-hidden`}
       >
         <AnimatePresence mode="wait">
-          {currentView === 'home' ? (
-            <motion.div 
-              key="home" 
-              className="h-full w-full overflow-y-auto" 
-              onScroll={handleScroll} 
-              ref={containerRef}
-            >
+          {currentView === 'home' && (
+            <motion.div key="home" className="h-full w-full overflow-y-auto" onScroll={handleScroll} ref={containerRef}>
               <HeroSection id="hero" onAction={() => setCurrentView('services')} />
               <VisionSummarySection id="about-summary" onAction={() => setCurrentView('about')} />
               <DivisionsGridSection id="divisions" onAction={() => setCurrentView('services')} />
@@ -253,185 +161,62 @@ const App: React.FC = () => {
               <ContactSection id="contact" />
               <Footer />
             </motion.div>
-          ) : currentView === 'about' ? (
-            <motion.div key="about" className="h-full w-full overflow-y-auto bg-white">
-              <AboutUsPage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
-          ) : currentView === 'technology' ? (
-            <motion.div key="technology" className="h-full w-full overflow-y-auto bg-white">
-              <TechnologyPage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
-          ) : currentView === 'industries' ? (
-            <motion.div key="industries" className="h-full w-full overflow-y-auto bg-white">
-              <IndustriesPage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
-          ) : currentView === 'portfolio' ? (
-            <motion.div key="portfolio" className="h-full w-full overflow-y-auto bg-white">
-              <FullPortfolioPage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
-          ) : currentView === 'compliance' ? (
-            <motion.div key="compliance" className="h-full w-full overflow-y-auto bg-white">
-              <CompliancePage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
-          ) : (
-            <motion.div key="services" className="h-full w-full overflow-y-auto bg-white">
-              <ServicesPage onBack={() => setCurrentView('home')} />
-              <Footer />
-            </motion.div>
           )}
+          {currentView === 'about' && <motion.div key="about" className="h-full w-full overflow-y-auto"><AboutUsPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'technology' && <motion.div key="technology" className="h-full w-full overflow-y-auto"><TechnologyPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'industries' && <motion.div key="industries" className="h-full w-full overflow-y-auto"><IndustriesPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'portfolio' && <motion.div key="portfolio" className="h-full w-full overflow-y-auto"><FullPortfolioPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'compliance' && <motion.div key="compliance" className="h-full w-full overflow-y-auto"><CompliancePage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'contact-page' && <motion.div key="contact-page" className="h-full w-full overflow-y-auto"><ContactUsFullPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
+          {currentView === 'services' && <motion.div key="services" className="h-full w-full overflow-y-auto"><ServicesPage onBack={() => setCurrentView('home')} /><Footer /></motion.div>}
         </AnimatePresence>
       </motion.div>
 
       {/* Sidebar Navigation */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.aside 
-            initial={{ x: 300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 300, opacity: 0 }}
-            className="fixed lg:relative top-0 right-0 h-screen w-[280px] bg-[#f5f5f7] border-l border-slate-200 z-[110] flex flex-col shadow-2xl lg:shadow-none overflow-hidden"
-          >
+          <motion.aside initial={{ x: 300, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 300, opacity: 0 }} className="fixed lg:relative top-0 right-0 h-screen w-[280px] bg-[#f5f5f7] border-l border-slate-200 z-[110] flex flex-col shadow-2xl lg:shadow-none overflow-hidden">
             <div className="p-8 pb-4 flex justify-between items-center border-b border-slate-200 mb-4 uppercase">
               <span className="text-[9px] font-black tracking-[0.4em] text-slate-400">Hub Console</span>
               <button onClick={() => setIsMenuOpen(false)} className="text-slate-500 lg:hidden"><X size={18} /></button>
             </div>
-
             <div className="flex-1 overflow-y-auto px-6 space-y-4 py-4 no-scrollbar">
-              <NavGroup 
-                label="HOME" sub="Main Portal" icon={<Home size={18} />} 
-                isOpen={isHomeExpanded} onToggle={() => {
-                  setIsHomeExpanded(!isHomeExpanded);
-                  setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
+              <NavGroup label="HOME" sub="Main Portal" icon={<Home size={18} />} isOpen={isHomeExpanded} onToggle={() => { setIsHomeExpanded(!isHomeExpanded); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false); setIsContactExpanded(false); }}>
                 {SECTIONS.map(s => (
                   <button key={s.id} onClick={() => scrollToSection(s.id)} className={`flex items-center gap-3 w-full p-3 rounded-xl text-left font-black uppercase text-[9px] tracking-widest transition-all ${activeSection === s.id && currentView === 'home' ? 'bg-black text-white' : 'text-slate-400 hover:text-black hover:bg-slate-200'}`}>
                     <span className="p-1.5 rounded-lg shadow-sm bg-white text-black">{s.icon}</span> {s.label}
                   </button>
                 ))}
               </NavGroup>
-
-              <NavGroup 
-                label="ABOUT US" sub="Company DNA" icon={<Users size={18} />} 
-                isOpen={isAboutExpanded} onToggle={() => {
-                  setIsAboutExpanded(!isAboutExpanded);
-                  setIsHomeExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('about')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Scan size={14} /> Full Company Profile
-                </button>
-                {ABOUT_SUB_SECTIONS.map(s => (
-                  <button key={s.id} onClick={() => navigateToAboutSection(s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {s.icon} {s.label}
-                  </button>
+              <NavGroup label="ABOUT US" sub="Company DNA" icon={<Users size={18} />} isOpen={isAboutExpanded} onToggle={() => { setIsAboutExpanded(!isAboutExpanded); setIsHomeExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false); setIsContactExpanded(false); }}>
+                {[{ id: 'story', l: 'Story' }, { id: 'vision', l: 'Vision' }, { id: 'values', l: 'Values' }, { id: 'leadership', l: 'Leadership' }].map(s => (
+                  <button key={s.id} onClick={() => navigateToSubSection('about', s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all">{s.l}</button>
                 ))}
               </NavGroup>
-
-              <NavGroup 
-                label="TECHNOLOGY" sub="Intelligence Layer" icon={<Cpu size={18} />} 
-                isOpen={isTechExpanded} onToggle={() => {
-                  setIsTechExpanded(!isTechExpanded);
-                  setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('technology')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Activity size={14} /> KAVY Systems Overview
-                </button>
-                {TECH_SUB_SECTIONS.map(s => (
-                  <button key={s.id} onClick={() => navigateToTechSection(s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {s.icon} {s.label}
-                  </button>
+              <NavGroup label="TECHNOLOGY" sub="Intel Layer" icon={<Cpu size={18} />} isOpen={isTechExpanded} onToggle={() => { setIsTechExpanded(!isTechExpanded); setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false); setIsContactExpanded(false); }}>
+                {[{ id: 'platform', l: 'KAVY Systems' }, { id: 'ai-design', l: 'AI Visual' }, { id: 'predictive', l: 'Predictive' }].map(s => (
+                  <button key={s.id} onClick={() => navigateToSubSection('technology', s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all">{s.l}</button>
                 ))}
               </NavGroup>
-
-              <NavGroup 
-                label="PORTFOLIO" sub="Proven Execution" icon={<Hexagon size={18} />} 
-                isOpen={isPortfolioExpanded} onToggle={() => {
-                  setIsPortfolioExpanded(!isPortfolioExpanded);
-                  setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('portfolio')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Maximize2 size={14} /> Projects Hub
-                </button>
-                {PORTFOLIO_SUB_SECTIONS.map(s => (
-                  <button key={s.id} onClick={() => navigateToPortfolioSection(s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {s.icon} {s.label}
-                  </button>
+              <NavGroup label="GOVERNANCE" sub="Trust Registry" icon={<ShieldCheck size={18} />} isOpen={isComplianceExpanded} onToggle={() => { setIsComplianceExpanded(!isComplianceExpanded); setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsContactExpanded(false); }}>
+                {[{ id: 'qa-framework', l: 'Quality' }, { id: 'hse-policy', l: 'Safety' }, { id: 'certifications', l: 'Certs' }].map(s => (
+                  <button key={s.id} onClick={() => navigateToSubSection('compliance', s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all">{s.l}</button>
                 ))}
               </NavGroup>
-
-              <NavGroup 
-                label="GOVERNANCE" sub="Quality & Safety" icon={<ShieldCheck size={18} />} 
-                isOpen={isComplianceExpanded} onToggle={() => {
-                  setIsComplianceExpanded(!isComplianceExpanded);
-                  setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('compliance')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Scale size={14} /> Governance Registry
-                </button>
-                {COMPLIANCE_SUB_SECTIONS.map(s => (
-                  <button key={s.id} onClick={() => navigateToComplianceSection(s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {s.icon} {s.label}
-                  </button>
+              <NavGroup label="CONTACT" sub="Strategic Link" icon={<Headset size={18} />} isOpen={isContactExpanded} onToggle={() => { setIsContactExpanded(!isContactExpanded); setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false); }}>
+                {[{ id: 'general', l: 'Contact Us' }, { id: 'quote', l: 'Quotes' }, { id: 'locations', l: 'Locations' }].map(s => (
+                  <button key={s.id} onClick={() => navigateToSubSection('contact-page', s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all">{s.l}</button>
                 ))}
               </NavGroup>
-
-              <NavGroup 
-                label="INDUSTRIES" sub="Asset Classes" icon={<Building2 size={18} />} 
-                isOpen={isIndustriesExpanded} onToggle={() => {
-                  setIsIndustriesExpanded(!isIndustriesExpanded);
-                  setIsHomeExpanded(false); setIsAboutExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('industries')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Globe size={14} /> Global Industry Outlook
-                </button>
-                {INDUSTRIES_DATA.map(ind => (
-                  <button key={ind.id} onClick={() => navigateToIndustry(ind.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {ind.title.split(' & ')[0]}
-                  </button>
-                ))}
-              </NavGroup>
-
-              <NavGroup 
-                label="SERVICES" sub="7 Systems" icon={<Briefcase size={18} />} 
-                isOpen={isServicesExpanded} onToggle={() => {
-                  setIsServicesExpanded(!isServicesExpanded);
-                  setIsHomeExpanded(false); setIsAboutExpanded(false); setIsIndustriesExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false);
-                }}
-              >
-                <button onClick={() => setCurrentView('services')} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2 mb-2">
-                  <Layers size={14} /> Systems Capability Matrix
-                </button>
-                {FULL_SERVICES.map(s => (
-                  <button key={s.id} onClick={() => navigateToService(s.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
-                    {s.icon} {s.title}
-                  </button>
-                ))}
-              </NavGroup>
-            </div>
-
-            <div className="p-8 border-t border-slate-200">
-              <button onClick={() => setIsMenuOpen(false)} className="w-full py-3 bg-black text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-[#ccff00] hover:text-black transition-all">Minimize Console</button>
             </div>
           </motion.aside>
         )}
       </AnimatePresence>
-
       {!isMenuOpen && (
         <button onClick={() => setIsMenuOpen(true)} className="fixed top-8 right-8 z-[120] bg-black text-white p-5 rounded-3xl shadow-2xl hover:bg-[#ccff00] hover:text-black transition-all group">
           <Menu size={20} className="group-hover:rotate-90 transition-transform" />
         </button>
       )}
-
       <AIConsultant />
     </div>
   );
@@ -449,18 +234,13 @@ const NavGroup = ({ label, sub, icon, children, isOpen, onToggle }: any) => (
       </div>
       <ChevronDown size={14} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
     </button>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden flex flex-col gap-1 pl-4">
-          {children}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <AnimatePresence>{isOpen && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden flex flex-col gap-1 pl-4">{children}</motion.div>}</AnimatePresence>
   </div>
 );
 
-// --- HOME PAGE SECTIONS ---
+// --- SECTIONS ---
 
+<<<<<<< HEAD
 const HeroSection = ({ id, onAction }: any) => (
   <section id={id} className="relative min-h-screen flex items-center justify-center py-24 overflow-hidden bg-black">
     <div className="absolute inset-0 z-0">
@@ -488,12 +268,33 @@ const HeroSection = ({ id, onAction }: any) => (
       <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
         <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onAction} className="px-12 py-6 bg-[#ccff00] text-black rounded-2xl font-black text-sm tracking-widest uppercase shadow-2xl italic hover:bg-white transition-colors">Systems Capability Matrix</motion.button>
         <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})} className="px-12 py-6 border-2 border-white/30 text-white rounded-2xl font-black text-sm tracking-widest uppercase backdrop-blur-sm hover:bg-white hover:text-black transition-all italic">Initiate Briefing</motion.button>
+=======
+const HeroSection = ({ id, onAction }: any) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000", label: "Infrastructure" },
+    { url: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&w=2000", label: "Industrial" },
+    { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=2000", label: "Corporate" }
+  ];
+  useEffect(() => { const t = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 5000); return () => clearInterval(t); }, []);
+
+  return (
+    <section id={id} className="relative min-h-screen flex items-center justify-center py-24 overflow-hidden bg-black">
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait"><motion.img key={currentSlide} initial={{ opacity: 0, scale: 1.15 }} animate={{ opacity: 0.5, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 1.5 }} src={slides[currentSlide].url} className="w-full h-full object-cover" /></AnimatePresence>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
       </div>
-    </div>
-  </section>
-);
+      <div className="relative z-10 text-center max-w-5xl px-6">
+        <motion.span className="inline-flex px-6 py-2 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 border border-white/20">{slides[currentSlide].label} SYSTEM NOMINAL</motion.span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter mb-8 uppercase italic text-white">REDEFINING <br /> <span className="lemon-gradient-text italic">INTELLIGENT</span> <br /> ENVIRONMENTS.</h2>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center"><button onClick={onAction} className="px-10 py-5 bg-[#ccff00] text-black rounded-2xl font-black text-xs tracking-widest uppercase italic shadow-2xl">Capabilities</button><button onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})} className="px-10 py-5 border-2 border-white/30 text-white rounded-2xl font-black text-xs tracking-widest uppercase backdrop-blur-sm italic">Initiate Brief</button></div>
+      </div>
+    </section>
+  );
+};
 
 const VisionSummarySection = ({ id, onAction }: any) => (
+<<<<<<< HEAD
   <section id={id} className="min-h-screen bg-[#f5f5f7] flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
       <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-12 order-2 lg:order-1">
@@ -509,12 +310,23 @@ const VisionSummarySection = ({ id, onAction }: any) => (
       </motion.div>
       <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="relative order-1 lg:order-2">
         <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=1200" alt="Vision" className="rounded-[60px] shadow-3xl object-cover h-[300px] md:h-[700px] w-4/5 mx-auto" />
+=======
+  <section id={id} className="py-24 md:py-32 bg-[#f5f5f7] px-6 overflow-hidden">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-8">
+        <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-5 py-2 bg-black rounded-lg inline-block italic">About Kavy</span>
+        <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic leading-none">SYSTEMS-LED <br /> ENVIRONMENTS.</h3>
+        <p className="text-slate-500 text-lg md:text-xl font-light leading-relaxed italic">KAVY is a built-environment systems company designed to redefine asset protection across Africa.</p>
+        <button onClick={onAction} className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.2em] border-b-2 border-black pb-2 italic">Access Full DNA <ArrowUpRight size={16} /></button>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
       </motion.div>
+      <motion.img initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=800" className="rounded-[40px] shadow-2xl h-[400px] object-cover" />
     </div>
   </section>
 );
 
 const DivisionsGridSection = ({ id, onAction }: any) => (
+<<<<<<< HEAD
   <section id={id} className="min-h-screen bg-white flex flex-col justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full mx-auto">
       <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
@@ -533,6 +345,20 @@ const DivisionsGridSection = ({ id, onAction }: any) => (
               <h4 className="font-heading text-2xl font-black italic">{serv.title}</h4>
             </div>
             <button onClick={() => document.getElementById('services')?.scrollIntoView({behavior:'smooth'})} className="relative z-10 text-[9px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 flex items-center gap-2 bg-transparent border-none cursor-pointer hover:text-[#ccff00] transition-colors">Explore System <ChevronRight size={12}/></button>
+=======
+  <section id={id} className="py-24 md:py-32 bg-white px-6">
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic">7 CORE DIVISIONS</h3>
+        <button onClick={onAction} className="px-8 py-4 bg-black text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl italic">Capability Matrix</button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {FULL_SERVICES.map((s, i) => (
+          <motion.div key={i} whileHover={{ y: -5 }} className="group relative p-8 bg-[#f5f5f7] rounded-[40px] h-[300px] flex flex-col justify-between overflow-hidden shadow-sm">
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"><img src={s.img} className="w-full h-full object-cover" /></div>
+            <div className="relative z-10"><div className="p-4 bg-white rounded-xl w-fit mb-4">{s.icon}</div><h4 className="font-heading text-xl font-black italic">{s.title}</h4></div>
+            <span className="relative z-10 text-[8px] font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 italic">Explore System</span>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
           </motion.div>
         ))}
       </div>
@@ -541,6 +367,7 @@ const DivisionsGridSection = ({ id, onAction }: any) => (
 );
 
 const TechnologyTeaserSection = ({ id, onAction }: any) => (
+<<<<<<< HEAD
   <section id={id} className="min-h-screen bg-black text-white flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden relative">
     <div className="absolute inset-0 opacity-20 pointer-events-none blur-3xl"><div className="w-[800px] h-[800px] bg-[#ccff00]/20 rounded-full absolute -top-40 -left-40 animate-pulse"></div></div>
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center relative z-10">
@@ -563,11 +390,23 @@ const TechnologyTeaserSection = ({ id, onAction }: any) => (
             <motion.h4 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }} className="text-[#ccff00] font-heading text-4xl font-black italic">INTELLIGENCE V2.4</motion.h4>
          </div>
       </motion.div>
+=======
+  <section id={id} className="py-24 md:py-32 bg-black text-white px-6 overflow-hidden">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="space-y-8">
+        <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-5 py-2 bg-white/10 rounded-lg inline-block italic">The Intel Layer</span>
+        <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic">DIGITAL INFRASTRUCTURE.</h3>
+        <p className="text-slate-400 text-lg md:text-xl font-light italic">KAVY transforms physical spaces into data-driven assets via AI and IoT.</p>
+        <button onClick={onAction} className="px-10 py-5 bg-[#ccff00] text-black rounded-xl font-black text-xs uppercase italic">Explore Technology</button>
+      </div>
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&w=800" className="rounded-[40px] shadow-2xl grayscale brightness-75 h-[400px] object-cover" />
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
     </div>
   </section>
 );
 
 const IndustriesSummarySection = ({ id, onAction }: any) => (
+<<<<<<< HEAD
   <section id={id} className="min-h-screen bg-[#1d1d1f] text-white flex items-center justify-center py-16 md:py-24 px-6 overflow-hidden">
     <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center relative z-10">
       <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative rounded-[80px] overflow-hidden h-[400px] md:h-[750px] shadow-3xl order-2 lg:order-1">
@@ -580,11 +419,23 @@ const IndustriesSummarySection = ({ id, onAction }: any) => (
         <p className="text-slate-400 text-xl md:text-1xl font-light leading-relaxed italic">KAVY delivers end-to-end lifecycle solutions tailored to the unique requirements of each industry.</p>
         <button onClick={onAction} className="px-12 py-6 bg-[#ccff00] text-black rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-white transition-all shadow-xl italic">Market Sector Insights</button>
       </motion.div>
+=======
+  <section id={id} className="py-24 md:py-32 bg-[#1d1d1f] text-white px-6">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <img src="https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800" className="rounded-[40px] shadow-2xl grayscale h-[400px] object-cover order-2 lg:order-1" />
+      <div className="space-y-8 order-1 lg:order-2">
+        <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-5 py-2 bg-white/10 rounded-lg inline-block italic">Market Sectors</span>
+        <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic">INTELLIGENT VERTICALS.</h3>
+        <p className="text-slate-400 text-lg md:text-xl font-light italic">End-to-end solutions for every strategic industry across Africa.</p>
+        <button onClick={onAction} className="px-10 py-5 bg-[#ccff00] text-black rounded-xl font-black text-xs uppercase italic">Sector Insights</button>
+      </div>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
     </div>
   </section>
 );
 
 const HomePortfolioSection = ({ id, onAction }: any) => (
+<<<<<<< HEAD
   <section id={id} className="bg-[#f5f5f7] flex items-center justify-center py-8 md:py-12 px-6 overflow-hidden">
     <div className="max-w-7xl w-full">
       <div className="mb-6 text-center"><h3 className="font-heading text-5xl lg:text-7xl font-black tracking-tighter uppercase italic">PORTFOLIO <br /> OF IMPACT.</h3></div>
@@ -607,11 +458,25 @@ const HomePortfolioSection = ({ id, onAction }: any) => (
       <div className="mt-8 text-center">
         <button onClick={onAction} className="px-12 py-6 bg-black text-white rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-[#ccff00] hover:text-black transition-all italic flex items-center gap-3 mx-auto shadow-2xl">Access Full Impact Registry <ArrowRight size={18} /></button>
       </div>
+=======
+  <section id={id} className="py-24 md:py-32 bg-[#f5f5f7] px-6">
+    <div className="max-w-7xl mx-auto">
+      <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic text-center mb-16">PORTFOLIO OF IMPACT.</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[{ t: 'Lagos City Hub', c: 'SPACES' }, { t: 'Lifecycle AI', c: 'SYSTEMS' }, { t: 'Maritime Port', c: 'COATINGS' }].map((p, i) => (
+          <div key={i} className="group relative h-[400px] rounded-[50px] overflow-hidden shadow-lg cursor-pointer" onClick={onAction}>
+            <img src={`https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=800&q=${i}`} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 p-10 flex flex-col justify-end"><h4 className="text-white font-heading text-2xl font-black italic mb-2">{p.t}</h4><p className="text-[#ccff00] font-black text-[9px] tracking-widest uppercase">{p.c}</p></div>
+          </div>
+        ))}
+      </div>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
     </div>
   </section>
 );
 
 const HomeReviewsSection = () => (
+<<<<<<< HEAD
   <section className="bg-white py-16 md:py-24 px-6 overflow-hidden border-t border-slate-100">
     <div className="max-w-7xl w-full mx-auto">
       <div className="text-center mb-24 uppercase italic"><h3 className="font-heading text-5xl lg:text-7xl font-black tracking-tighter italic">THE NETWORK.</h3></div>
@@ -626,6 +491,18 @@ const HomeReviewsSection = () => (
             <p className="text-slate-600 font-light italic text-lg leading-relaxed mb-6 group-hover:text-slate-300 transition-colors">"{rev.text}"</p>
             <div className="space-y-1"><h5 className="font-black text-lg group-hover:text-[#ccff00] transition-colors uppercase italic">{rev.author}</h5><p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{rev.org}</p></div>
           </motion.div>
+=======
+  <section className="py-24 md:py-32 bg-white px-6">
+    <div className="max-w-7xl mx-auto">
+      <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic text-center mb-16">THE NETWORK.</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[{ a: "Dr. Adebayo", o: "Logistics Hub" }, { a: "Sarah J.", o: "Tech Corp" }, { a: "Engr. Koffi", o: "Public Works" }].map((r, i) => (
+          <div key={i} className="p-10 bg-[#f5f5f7] rounded-[50px] hover:bg-black group transition-all duration-500">
+            <p className="text-slate-600 italic text-lg leading-relaxed mb-8 group-hover:text-slate-300">"KAVY redefined our facility coatings. Engineering meets software excellence."</p>
+            <h5 className="font-black group-hover:text-[#ccff00] uppercase italic">{r.a}</h5>
+            <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{r.o}</p>
+          </div>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
         ))}
       </div>
     </div>
@@ -633,6 +510,7 @@ const HomeReviewsSection = () => (
 );
 
 const ContactSection = ({ id }: any) => (
+<<<<<<< HEAD
   <section id={id} className="bg-black text-white flex flex-col justify-center py-8 md:py-12 px-6 relative overflow-hidden">
     <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
       <div className="space-y-8">
@@ -644,36 +522,64 @@ const ContactSection = ({ id }: any) => (
         <h4 className="font-heading text-2xl md:text-3xl font-black mb-6 uppercase italic underline decoration-[#ccff00] decoration-4 underline-offset-4">Mission Portal</h4>
         <form className="space-y-4"><div className="space-y-1"><label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Strategic Email</label><input type="email" className="w-full bg-[#f5f5f7] rounded-[20px] p-4 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="INTEL@DOMAIN.COM" /></div><div className="space-y-1"><label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Objective Summary</label><textarea rows={2} className="w-full bg-[#f5f5f7] rounded-[20px] p-4 focus:outline-none font-bold uppercase tracking-widest text-xs italic border-2 border-transparent focus:border-[#ccff00] transition-all" placeholder="BRIEF_SYNOPSIS"></textarea></div><button className="w-full py-4 bg-[#ccff00] text-black font-black uppercase tracking-[0.4em] text-xs rounded-[20px] hover:bg-black hover:text-[#ccff00] transition-all shadow-2xl italic">Transmit Brief</button></form>
       </motion.div>
+=======
+  <section id={id} className="py-24 md:py-32 bg-black text-white px-6 overflow-hidden border-t border-white/5">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="space-y-12">
+        <h3 className="font-heading text-4xl md:text-5xl font-black uppercase italic leading-[0.8]"><span className="text-[#ccff00]">STRATEGIC</span> <br /> BRIEFING.</h3>
+        <div className="p-6 bg-white/5 rounded-[30px] border border-white/10 w-fit flex items-center gap-6"><Phone size={24} className="text-[#ccff00]" /><div><p className="text-[9px] font-black tracking-widest text-slate-500 mb-1">EXEC LINE</p><p className="text-xl font-black italic">+234 814 413 0329</p></div></div>
+      </div>
+      <div className="bg-white p-10 rounded-[50px] text-black shadow-2xl"><h4 className="font-heading text-2xl font-black mb-8 uppercase italic underline decoration-[#ccff00] decoration-4 underline-offset-4">Mission Portal</h4><form className="space-y-6"><input type="email" placeholder="EMAIL@DOMAIN.COM" className="w-full bg-[#f5f5f7] rounded-2xl p-5 focus:outline-none font-bold text-xs italic border border-transparent focus:border-[#ccff00] transition-colors" /><textarea rows={3} placeholder="SYNOPSIS" className="w-full bg-[#f5f5f7] rounded-2xl p-5 focus:outline-none font-bold text-xs italic border border-transparent focus:border-[#ccff00] transition-colors"></textarea><button className="w-full py-6 bg-black text-white font-black uppercase text-xs rounded-2xl hover:bg-[#ccff00] hover:text-black transition-all italic shadow-lg">Transmit Brief</button></form></div>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
     </div>
   </section>
 );
 
 const Footer = () => (
+<<<<<<< HEAD
   <footer className="bg-slate-200 text-slate-600 py-8 md:py-12 px-6 border-t border-slate-300 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
       <div className="space-y-4">
         <div className="flex items-center gap-3"><KavyLogo className="w-10 h-10 text-black" /><span className="font-heading font-black text-black text-2xl tracking-tighter uppercase italic">KAVY LTD</span></div>
         <p className="text-xs font-medium leading-relaxed uppercase tracking-[0.1em] text-slate-500 italic">Integrating spaces, infrastructure, and technology across Africa.</p>
+=======
+  <footer className="bg-slate-200 text-slate-600 py-8 md:py-10 px-6 border-t border-slate-300 relative z-10 overflow-hidden">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="flex flex-col items-center md:items-start space-y-4">
+        <div className="flex items-center gap-3"><KavyLogo className="w-8 h-8 text-black" /><span className="font-heading font-black text-black text-xl tracking-tighter uppercase italic">KAVY LTD</span></div>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 italic max-w-xs text-center md:text-left">Integrated Building Intelligence • Africa Scale Secured.</p>
+      </div>
+
+      <div className="flex items-center justify-center gap-6 py-2 px-8 bg-white/50 backdrop-blur-sm rounded-full shadow-sm">
+        {[Linkedin, Facebook, Instagram].map((Icon, i) => (
+          <a key={i} href="#" className="p-2.5 text-slate-500 hover:text-black hover:bg-white rounded-full transition-all"><Icon size={18} /></a>
+        ))}
+      </div>
+
+      <div className="flex flex-col md:flex-row items-center gap-6 text-[9px] font-black uppercase tracking-widest italic text-slate-500">
+        <div className="flex items-center gap-2"><MapPin size={12} className="text-black" /> Lagos HQ</div>
+        <div className="flex items-center gap-2"><Phone size={12} className="text-black" /> +234 814 413 0329</div>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
       </div>
       <div className="space-y-3 text-slate-500"><p className="text-black text-xs font-black">Primary Operations</p><p className="flex items-center gap-2 font-bold italic text-xs"><MapPin size={12} className="text-black" /> Lagos HQ, Nigeria</p><p className="flex items-center gap-2 font-bold italic text-xs"><Phone size={12} className="text-black" /> +234 814 413 0329</p></div>
       <div className="space-y-3 text-slate-500"><p className="text-black text-xs font-black">Strategic Governance</p><a href="#" className="block hover:text-black transition-colors italic text-xs border-b border-transparent hover:border-black w-fit pb-1">Safety Protocols</a><a href="#" className="block hover:text-black transition-colors italic text-xs border-b border-transparent hover:border-black w-fit pb-1">Privacy Architecture</a></div>
       <div className="space-y-3"><p className="text-black text-xs font-black">Connect</p><div className="flex gap-3">{[[Linkedin, '#'], [Facebook, '#'], [Instagram, '#']].map(([Icon, link]: any, i) => (<a key={i} href={link} className="p-2 bg-white rounded-full hover:bg-black hover:text-[#ccff00] shadow-md transition-all"><Icon size={14} /></a>))}</div></div>
     </div>
+<<<<<<< HEAD
     <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-300 text-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 italic">
       <p>© 2024 KAVY LTD. SYSTEMS NOMINAL • REGIONAL SCALE SECURED.</p>
+=======
+    
+    <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-slate-300/50 flex justify-center text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 italic">
+      <p>© 2024 KAVY LTD • SYSTEMS NOMINAL • ALL RIGHTS SECURED.</p>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
     </div>
   </footer>
 );
 
-// --- FULL PAGE: ABOUT US ---
-const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
-  return (
-    <div className="bg-white min-h-screen">
-      <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
-        <motion.div initial={{ scale: 1.2, opacity: 0 }} animate={{ scale: 1, opacity: 0.15 }} transition={{ duration: 2 }} className="absolute inset-0 pointer-events-none"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000" className="w-full h-full object-cover" alt="Built Environment" /></motion.div>
-        <div className="max-w-7xl mx-auto relative z-10"><motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}><span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">Systemic Built Environments</span><h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase">INTELLIGENCE <br /> <span className="text-white/20 italic">BEYOND</span> <br /> SURFACES.</h2><p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">KAVY is not a painting company. KAVY is a built-environment systems company designed to redefine how Africa protects and maintains its physical assets.</p></motion.div></div>
-      </section>
+// --- FULL PAGES (MEDIUM HEADINGS) ---
 
+<<<<<<< HEAD
       <section id="about-story" className="py-24 md:py-32 px-8 lg:px-24 overflow-hidden border-b border-slate-100 scroll-mt-24"><div className="max-w-7xl mx-auto"><div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100 }} viewport={{ once: true }} className="space-y-16"><div className="flex items-center gap-6 text-slate-400"><History size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">The Genesis</span></div><h3 className="font-heading text-5xl md:text-9xl font-black uppercase tracking-tight leading-none italic">WHY KAVY <br /> EXISTS.</h3><div className="p-12 bg-[#1d1d1f] text-white rounded-[70px] shadow-3xl relative overflow-hidden group"><img src="https://images.unsplash.com/photo-1541913054-21199a42d530?auto=format&w=800" className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-110 transition-transform duration-1000" alt="Problem" /><div className="relative z-10"><h4 className="text-[#ccff00] font-black uppercase text-xs tracking-[0.3em] mb-6">The Systemic Gap</h4><p className="text-slate-400 font-light text-lg md:text-xl leading-relaxed italic">Infrastructure deteriorates years early due to fragmented, labor-dependent maintenance. We saw an engineering problem, not a cosmetic one.</p></div></div></motion.div><motion.div whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.8 }} viewport={{ once: true }} className="relative"><div className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl group"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&w=1200" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Insight" /><div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-16"><p className="text-white text-3xl font-heading font-black tracking-tight leading-tight uppercase italic border-l-4 border-[#ccff00] pl-8">BEYOND THE <br /> COSMETIC LAYER.</p></div></div></motion.div></div></div></section>
 
       <section id="about-vision" className="py-24 md:py-32 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"><div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center"><motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 100 }} viewport={{ once: true }} className="space-y-24 order-2 lg:order-1"><div className="space-y-10"><div className="flex items-center gap-6 text-[#ccff00] bg-black px-8 py-4 rounded-3xl w-fit shadow-2xl"><Eye size={24} /> <span className="font-black uppercase tracking-[0.3em] text-[11px]">The Vision</span></div><h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">AFRICA'S LEADING SYSTEMS UNICORN.</h3><p className="text-slate-500 text-xl md:text-2xl font-light leading-relaxed italic">To become Africa’s leading built-environment systems company, delivering intelligent solutions across residential, industrial, and public infrastructure.</p></div></motion.div><motion.div whileInView={{ scale: 1, opacity: 1 }} initial={{ scale: 0.9, opacity: 0 }} viewport={{ once: true }} className="relative rounded-[100px] overflow-hidden h-[600px] md:h-[900px] shadow-3xl order-1 lg:order-2 group"><img src="https://images.unsplash.com/photo-1449156001934-19918c217523?auto=format&w=1200" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" alt="Future City" /><div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div></motion.div></div></section>
@@ -858,495 +764,259 @@ const IndustriesPage = ({ onBack }: { onBack: () => void }) => {
             </div>
           </section>
         ))}
+=======
+const AboutUsPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="absolute inset-0 opacity-20 pointer-events-none"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000" className="w-full h-full object-cover" /></div>
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Company DNA</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">INTELLIGENCE <br /> <span className="text-white/20 italic">BEYOND</span> <br /> SURFACES.</h2>
+        <p className="text-slate-400 text-lg md:text-2xl font-light italic max-w-3xl mx-auto leading-relaxed">Redefining physical asset protection and built environments across the continent through engineering excellence.</p>
+>>>>>>> 2f8cf365a87f19fa0df562b24042c8521db66dc3
       </div>
-
-      <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8 relative overflow-hidden"><h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10">MARKET <br /> <span className="text-[#ccff00]">INTELLIGENCE.</span></h3><div className="flex flex-col sm:flex-row gap-10 relative z-10"><button onClick={onBack} className="px-16 py-8 bg-[#ccff00] text-black rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-white transition-all italic shadow-3xl">HQ Main Portal</button></div></section>
-    </div>
-  );
-};
-
-// --- FULL PAGE: PROJECTS & PORTFOLIO ---
-const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
-  const [filter, setFilter] = useState('All');
-  
-  const featuredProjects = [
-    {
-      id: 'gov-office',
-      name: "National Government Office Complex",
-      client: "Ministry of Works",
-      sector: "Government & Public Assets",
-      scope: "Exterior & interior coatings, digital asset registry, maintenance contract",
-      scale: "120,000 sqm",
-      outcomes: ["40% reduction in maintenance cost", "15-year surface lifecycle guarantee", "Centralized asset performance dashboard"],
-      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&w=1200",
-      tech: "KAVY Lifecycle OS v2.1"
-    },
-    {
-      id: 'industrial-hub',
-      name: "Regional Manufacturing Hub",
-      client: "Global Logistics Corp",
-      sector: "Industrial & Manufacturing",
-      scope: "Anti-corrosion floors, chemical resistance systems, IoT floor sensors",
-      scale: "45,000 sqm",
-      outcomes: ["Zero chemical floor failures", "25% improvement in floor safety rating", "Real-time moisture tracking"],
-      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&w=1200",
-      tech: "IoT Matrix, Chemical Bond-V"
-    }
-  ];
-
-  const categories = ["All", "Government", "Corporate", "Residential", "Industrial", "Infrastructure", "Smart Cities"];
-
-  return (
-    <div className="bg-white min-h-screen">
-      <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
-        <motion.div initial={{ scale: 1.2, opacity: 0 }} animate={{ scale: 1, opacity: 0.25 }} transition={{ duration: 2 }} className="absolute inset-0 pointer-events-none">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000" className="w-full h-full object-cover" alt="Portfolio" />
-        </motion.div>
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic">Impact Log & Execution Registry</span>
-             <h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase italic">PROJECTS <br /> & <span className="text-white/20">PORTFOLIO.</span></h2>
-             <p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl mx-auto italic">Proven Execution. Measurable Impact. Trusted Outcomes.</p>
-          </motion.div>
+    </section>
+    
+    <section id="about-story" className="py-24 px-6 border-b border-slate-100 bg-[#f5f5f7]">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">WHY KAVY <br /> EXISTS.</h3>
+          <p className="text-slate-500 italic text-lg leading-relaxed mb-6">Infrastructure deteriorates prematurely due to fragmented management. We saw an engineering problem, not just a cosmetic one.</p>
+          <div className="p-6 border-l-4 border-black bg-white shadow-sm"><p className="text-sm font-black uppercase tracking-widest italic">"We are architects of durability."</p></div>
         </div>
-      </section>
-
-      <div className="sticky top-0 z-[60] bg-white/80 backdrop-blur-xl border-b border-slate-100 px-8 py-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="flex items-center gap-4 text-slate-400">
-              <Filter size={18} />
-              <span className="text-[10px] font-black uppercase tracking-widest">Filter Registry</span>
-           </div>
-           <div className="flex flex-wrap justify-center gap-3">
-             {categories.map(cat => (
-               <button 
-                 key={cat} 
-                 onClick={() => setFilter(cat)}
-                 className={`px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-black text-[#ccff00]' : 'bg-slate-50 text-slate-400 hover:bg-slate-200'}`}
-               >
-                 {cat}
-               </button>
-             ))}
-           </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1541913054-21199a42d530?auto=format&w=800" className="rounded-[40px] shadow-2xl h-[450px] object-cover" />
       </div>
+    </section>
 
-      <section id="port-featured" className="py-48 px-8 lg:px-24 overflow-hidden scroll-mt-24">
-        <div className="max-w-7xl mx-auto space-y-48">
-          <div className="text-center md:text-left"><h3 className="font-heading text-5xl md:text-9xl font-black uppercase italic tracking-tight mb-10">FLAGSHIP <br /> LOGS.</h3></div>
-          
-          {featuredProjects.map((proj, i) => (
-            <motion.div key={proj.id} initial={{ opacity: 0, y: 100 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className={`grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-               <div className={`lg:col-span-6 space-y-12 ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                  <div className="flex items-center gap-6 text-[#ccff00] bg-black px-6 py-3 rounded-2xl w-fit">
-                    <Award size={20} /> <span className="font-black uppercase tracking-[0.4em] text-[10px]">Featured Engagement</span>
-                  </div>
-                  <h4 className="font-heading text-4xl md:text-7xl font-black italic uppercase leading-none">{proj.name}</h4>
-                  <div className="grid grid-cols-2 gap-10 border-y border-slate-100 py-10">
-                     <div><p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Sector</p><p className="font-bold italic text-sm">{proj.sector}</p></div>
-                     <div><p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Scale</p><p className="font-bold italic text-sm">{proj.scale}</p></div>
-                  </div>
-                  <div className="space-y-6">
-                     <p className="text-slate-500 text-lg font-light italic leading-relaxed">{proj.scope}</p>
-                     <div className="p-10 bg-[#f5f5f7] rounded-[50px] space-y-6">
-                        <p className="text-[10px] font-black uppercase tracking-widest mb-4">Measurable Outcomes</p>
-                        {proj.outcomes.map((o, idx) => (
-                          <div key={idx} className="flex items-start gap-4 text-black font-bold italic text-sm">
-                             <TrendingUp size={16} className="text-[#ccff00]" /> {o}
-                          </div>
-                        ))}
-                     </div>
-                  </div>
-                  <button className="px-12 py-5 bg-black text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#ccff00] hover:text-black transition-all italic">View Case Study</button>
-               </div>
-               <div className={`lg:col-span-6 relative ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <div className="rounded-[100px] overflow-hidden aspect-[4/5] shadow-3xl group">
-                    <img src={proj.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt={proj.name} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-16">
-                       <div className="p-6 backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20">
-                          <p className="text-[9px] font-black uppercase tracking-widest text-slate-300 mb-2">Technology Deployed</p>
-                          <p className="text-[#ccff00] font-black italic">{proj.tech}</p>
-                       </div>
-                    </div>
-                  </div>
-               </div>
+    <section id="about-leadership" className="py-24 bg-black text-white px-6">
+      <div className="max-w-7xl mx-auto">
+        <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-16 text-center">THE ARCHITECTS.</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[{ n: "Seyi Kavy", r: "CEO & Founder", i: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" }, 
+            { n: "Dr. Elena Vance", r: "Materials Intelligence", i: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" }, 
+            { n: "Marcus Thorne", r: "Systems Infrastructure", i: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" }].map((l, i) => (
+            <motion.div key={i} whileHover={{ y: -10 }} className="space-y-6">
+              <div className="rounded-[50px] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 aspect-[3/4] border border-white/10">
+                <img src={l.i} className="w-full h-full object-cover" />
+              </div>
+              <div className="text-center">
+                <h4 className="font-heading text-xl font-black italic">{l.n}</h4>
+                <p className="text-[#ccff00] text-[10px] uppercase font-black tracking-widest mt-2">{l.r}</p>
+              </div>
             </motion.div>
           ))}
         </div>
-      </section>
-
-      <section id="port-before-after" className="py-48 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-10">
-             <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">VISUAL <br /> <span className="text-slate-300">TRANSFORM.</span></h3>
-             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">PHASE TRANSITION LOGS</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
-             {[
-               { title: "Infrastructure Decay → Protection", desc: "Corrosion control on major bridge assets.", imgBefore: "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800&grayscale=true", imgAfter: "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800" },
-               { title: "Generic Shell → Intelligent Space", desc: "Digital fit-out and smart coating integration.", imgBefore: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800&grayscale=true", imgAfter: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800" }
-             ].map((gal, i) => (
-               <div key={i} className="space-y-10">
-                  <div className="relative rounded-[80px] overflow-hidden aspect-video shadow-2xl group">
-                     <div className="absolute top-8 left-8 z-20 bg-black/80 backdrop-blur-md px-6 py-2 rounded-full text-[9px] font-black uppercase text-white tracking-widest">Original Condition</div>
-                     <div className="absolute top-8 right-8 z-20 bg-[#ccff00] px-6 py-2 rounded-full text-[9px] font-black uppercase text-black tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">KAVY Outcome</div>
-                     <img src={gal.imgBefore} className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-1000" alt="Before" />
-                     <img src={gal.imgAfter} className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-1000" alt="After" />
-                  </div>
-                  <div className="px-10">
-                     <h4 className="font-heading text-3xl font-black italic mb-4 uppercase">{gal.title}</h4>
-                     <p className="text-slate-500 font-light italic">{gal.desc}</p>
-                  </div>
-               </div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="port-infrastructure" className="py-48 px-8 lg:px-24 scroll-mt-24 bg-black text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center mb-32">
-              <div className="space-y-12">
-                 <div className="flex items-center gap-6 text-[#ccff00]"><HardHat size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">System Registry 04</span></div>
-                 <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">PROTECTING <br /> ASSETS.</h3>
-                 <p className="text-slate-400 text-xl font-light leading-relaxed italic">Engineered solutions for bridges, ports, and public transport hubs where failure is not an option.</p>
-              </div>
-              <div className="grid grid-cols-2 gap-8">
-                 {[
-                   { l: "ASSET LIFESPAN", v: "+25Y", c: "text-[#ccff00]" },
-                   { l: "FAILURE REDUCTION", v: "85%", c: "text-white" },
-                   { l: "COMPLIANCE", v: "STRICT", c: "text-[#ccff00]" },
-                   { l: "MONITORING", v: "LIVE", c: "text-white" }
-                 ].map((stat, i) => (
-                   <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] space-y-4">
-                      <p className="text-white/30 font-black text-[9px] tracking-widest uppercase">{stat.l}</p>
-                      <p className={`text-4xl font-heading font-black italic tracking-tighter ${stat.c}`}>{stat.v}</p>
-                   </div>
-                 ))}
-              </div>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {[
-                { t: "Bridge Integrity", d: "Corrosion control on regional span.", img: "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800" },
-                { t: "Maritime Terminals", d: "High-grade port protective coatings.", img: "https://images.unsplash.com/photo-1530124560676-41bc1275d4d4?auto=format&w=800" },
-                { t: "Railway Network", d: "Standardized signage and platform systems.", img: "https://images.unsplash.com/photo-1473876637954-4b493d59fd97?auto=format&w=800" }
-              ].map((inf, i) => (
-                <div key={i} className="group relative rounded-[60px] overflow-hidden aspect-[4/5] shadow-3xl">
-                   <img src={inf.img} className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" alt={inf.t} />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent p-12 flex flex-col justify-end">
-                      <h4 className="text-xl font-black italic uppercase mb-2">{inf.t}</h4>
-                      <p className="text-slate-400 text-xs font-light italic">{inf.d}</p>
-                   </div>
-                </div>
-              ))}
-           </div>
-        </div>
-      </section>
-
-      <section id="port-corporate-res" className="py-48 px-8 lg:px-24 scroll-mt-24 overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto">
-           <div className="text-center mb-32 space-y-10">
-             <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">LIFESTYLE <br /> <span className="text-slate-300">SYSTEMS.</span></h3>
-           </div>
-           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-              <div className="lg:col-span-4 space-y-16">
-                 <div className="space-y-8">
-                    <div className="flex items-center gap-6 text-slate-400"><Building2 size={24} /> <span className="font-black uppercase tracking-[0.4em] text-[10px]">Corporate Sector</span></div>
-                    <h4 className="text-4xl font-black italic uppercase leading-none">HEADQUARTERS & <br /> RETAIL.</h4>
-                    <p className="text-slate-500 font-light italic">Minimal disruption, brand-aligned aesthetics, and lifecycle durability planning.</p>
-                 </div>
-                 <div className="rounded-[60px] overflow-hidden aspect-[4/5] shadow-2xl"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&w=800" className="w-full h-full object-cover" alt="Corporate" /></div>
-              </div>
-              <div className="lg:col-span-8 flex flex-col justify-end space-y-16">
-                 <div className="rounded-[80px] overflow-hidden aspect-video shadow-2xl"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=1200" className="w-full h-full object-cover" alt="Residential" /></div>
-                 <div className="space-y-8 pl-10">
-                    <div className="flex items-center gap-6 text-slate-400"><Home size={24} /> <span className="font-black uppercase tracking-[0.4em] text-[10px]">Residential Sector</span></div>
-                    <h4 className="text-4xl font-black italic uppercase leading-none">LUXURY ESTATES & <br /> HIGH-RISE UNITS.</h4>
-                    <p className="text-slate-500 font-light italic max-w-lg">Protecting property value through engineered finishes and AI design visualization.</p>
-                 </div>
-              </div>
-           </div>
-        </div>
-      </section>
-
-      <section id="port-case-studies" className="py-48 px-8 lg:px-24 scroll-mt-24 overflow-hidden bg-[#f5f5f7]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-10">
-             <h3 className="font-heading text-6xl md:text-[10rem] font-black uppercase tracking-tighter italic">DATA LOGS.</h3>
-             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">EXECUTION BACKED BY METRICS</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              { client: "Industrial Manufacturing Facility", problem: "Rapid corrosion and floor degradation in heavy ops area.", result: "60% reduction in surface failures, 25% reduction in downtime, 12-year lifecycle forecast.", tech: "Industrial Bond + Predictive OS" },
-              { client: "Lagos Smart Urban District", problem: "Fragmented maintenance leading to asset devaluation.", result: "45% reduction in yearly repair budget, 100% digital asset visibility, optimized energy usage.", tech: "KAVY Systems Platform" }
-            ].map((cs, i) => (
-              <motion.div key={i} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.95 }} viewport={{ once: true }} className="p-16 bg-white rounded-[80px] shadow-2xl space-y-12 group hover:bg-black transition-all duration-700">
-                 <div className="space-y-4">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-[#ccff00] group-hover:text-[#ccff00]">Case Study Alpha-{i+1}</p>
-                    <h4 className="text-3xl font-black italic uppercase group-hover:text-white transition-colors">{cs.client}</h4>
-                 </div>
-                 <div className="space-y-6">
-                    <p className="text-slate-400 font-black uppercase text-[10px] tracking-widest italic group-hover:text-slate-500">The Challenge</p>
-                    <p className="text-slate-500 font-light italic text-lg leading-relaxed group-hover:text-slate-300">{cs.problem}</p>
-                 </div>
-                 <div className="space-y-6 p-10 bg-slate-50 rounded-[40px] border border-black/5 group-hover:bg-white/10 group-hover:border-white/10 transition-all">
-                    <p className="text-slate-400 font-black uppercase text-[10px] tracking-widest italic">Quantified Results</p>
-                    <p className="text-black font-black italic text-xl group-hover:text-[#ccff00] leading-snug">{cs.result}</p>
-                 </div>
-                 <div className="flex justify-between items-center pt-8 border-t border-slate-100 group-hover:border-white/10">
-                    <span className="text-[11px] font-black uppercase tracking-widest text-slate-400">{cs.tech}</span>
-                    <button className="p-4 bg-black text-white rounded-2xl group-hover:bg-[#ccff00] group-hover:text-black transition-all"><ArrowUpRight size={20} /></button>
-                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="w-[1200px] h-[1200px] bg-[#ccff00]/10 rounded-full blur-[150px] absolute -top-[600px] left-1/2 -translate-x-1/2"></div>
-          </div>
-          <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10 text-white/10">REGIONAL <br /> <span className="text-[#ccff00]">IMPACT.</span></h3>
-          <div className="flex flex-col sm:flex-row gap-10 relative z-10">
-             <button onClick={onBack} className="px-16 py-8 bg-[#ccff00] text-black rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-white transition-all shadow-3xl italic">HQ Main Portal</button>
-             <button className="px-16 py-8 border-4 border-[#ccff00] text-[#ccff00] rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-[#ccff00] hover:text-black transition-all italic">Initiate Project Brief</button>
-          </div>
-      </section>
-    </div>
-  );
-};
-
-// --- NEW FULL PAGE: QUALITY, SAFETY & COMPLIANCE ---
-const CompliancePage = ({ onBack }: { onBack: () => void }) => {
-  return (
-    <div className="bg-white min-h-screen">
-      {/* Governance Hero */}
-      <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
-        <motion.div initial={{ scale: 1.2, opacity: 0 }} animate={{ scale: 1, opacity: 0.3 }} transition={{ duration: 2 }} className="absolute inset-0 pointer-events-none">
-          <img src="https://images.unsplash.com/photo-1503387762-592dea58ef21?auto=format&w=2000" className="w-full h-full object-cover grayscale" alt="Compliance" />
-        </motion.div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">GOVERNANCE & STANDARDS</span>
-             <h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase italic">BUILT TO <br /> <span className="text-white/20">HIGHEST</span> <br /> STANDARDS.</h2>
-             <p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">Delivered With Accountability. Quality and safety are not checkboxes — they are core operating principles.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 1. Quality Assurance Framework */}
-      <section id="comp-qa-framework" className="py-48 px-8 lg:px-24 overflow-hidden border-b border-slate-100 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-start">
-             <motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100 }} viewport={{ once: true }} className="lg:col-span-5 space-y-12">
-                <div className="flex items-center gap-6 text-slate-400">
-                   <ClipboardCheck size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">System Registry 01</span>
-                </div>
-                <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">QUALITY <br /> ASSURANCE.</h3>
-                <p className="text-slate-500 text-xl font-light leading-relaxed italic">Consistency, Performance & Accountability. KAVY operates a structured QA Framework governing every phase of engagement.</p>
-                <div className="p-10 bg-[#f5f5f7] rounded-[60px] border border-black/5">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6 italic">Outcome for Clients</p>
-                   <ul className="space-y-4">
-                      {['Consistent quality across projects', 'Reduced defects and rework', 'Predictable performance outcomes'].map((o, idx) => (
-                        <li key={idx} className="flex items-center gap-4 text-black font-bold italic text-sm"><CheckCircle2 size={16} className="text-[#ccff00]" /> {o}</li>
-                      ))}
-                   </ul>
-                </div>
-             </motion.div>
-             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[
-                  { t: "Design & Specs", i: <Scan />, d: "AI-assisted validation and standardized documentation." },
-                  { t: "Material Quality", i: <Microscope />, d: "Batch testing and traceability of all formulations." },
-                  { t: "Execution Control", i: <HardHat />, d: "SOP-driven delivery via certified personnel." },
-                  { t: "Verification", i: <Search />, d: "Digital inspection records at every phase sign-off." },
-                  { t: "Performance", i: <LineChart />, d: "Surface tracking and warranty-backed outcomes." }
-                ].map((item, i) => (
-                  <motion.div key={i} whileInView={{ scale: 1, opacity: 1 }} initial={{ scale: 0.9, opacity: 0 }} transition={{ delay: i * 0.1 }} className="p-12 bg-white rounded-[50px] border border-slate-100 flex flex-col gap-8 group hover:shadow-3xl transition-all">
-                     <div className="p-6 bg-black text-[#ccff00] rounded-3xl w-fit group-hover:scale-110 transition-transform">{item.i}</div>
-                     <div className="space-y-4">
-                        <h4 className="font-black uppercase text-xl tracking-widest italic">{item.t}</h4>
-                        <p className="text-slate-400 font-light italic leading-relaxed">{item.d}</p>
-                     </div>
-                  </motion.div>
-                ))}
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Scrolling Images Section (HSE Visuals) */}
-      <div className="h-[400px] md:h-[600px] overflow-hidden bg-slate-100 flex relative">
-         <motion.div 
-           animate={{ x: ["0%", "-50%"] }} 
-           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-           className="flex gap-4 w-max p-4"
-         >
-            {[
-              "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&w=800",
-              "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800",
-              "https://images.unsplash.com/photo-1532187863486-abf85810603a?auto=format&w=800",
-              "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&w=800",
-              "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&w=800",
-              "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800"
-            ].map((img, i) => (
-              <img key={i} src={img} className="h-[350px] md:h-[550px] rounded-[60px] aspect-[4/3] object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-700" alt="Process" />
-            ))}
-         </motion.div>
       </div>
+    </section>
 
-      {/* 2. Health, Safety & Environment (HSE) Policy */}
-      <section id="comp-hse-policy" className="py-48 px-8 lg:px-24 bg-black text-white scroll-mt-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
-            <div className="space-y-10">
-              <div className="flex items-center gap-6 text-[#ccff00]"><ShieldCheck size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">System Registry 02</span></div>
-              <h3 className="font-heading text-5xl md:text-9xl font-black uppercase italic leading-none">PEOPLE FIRST. <br /> ALWAYS.</h3>
+    <section className="py-24 flex flex-col items-center bg-white"><button onClick={onBack} className="px-12 py-6 bg-black text-white rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-2xl hover:bg-[#ccff00] hover:text-black transition-all">Back to HQ Portal</button></section>
+  </div>
+);
+
+const TechnologyPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="absolute inset-0 opacity-20 pointer-events-none"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&w=2000" className="w-full h-full object-cover" /></div>
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">The Intel Layer</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">DIGITIZING <br /> <span className="text-white/20 italic">EVERY</span> <br /> STRUCTURE.</h2>
+        <p className="text-slate-400 text-lg md:text-2xl font-light italic max-w-3xl mx-auto leading-relaxed">KAVY Systems integrates AI, IoT, and high-fidelity 3D scanning to bridge the physical and digital gap.</p>
+      </div>
+    </section>
+    
+    <section id="tech-platform" className="py-24 px-6 bg-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">INTELLIGENCE <br /> CORE v2.4.</h3>
+          <p className="text-slate-500 text-lg leading-relaxed italic mb-8">Our proprietary platform provides real-time health monitoring for large-scale infrastructure and architectural assets.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {['Predictive Failure Modeling', 'AI Asset Visualization', 'IoT Sensor Integration', 'lifecycle CMS'].map(f => (
+              <div key={f} className="p-6 bg-[#f5f5f7] rounded-3xl border border-slate-200 font-black text-[10px] uppercase tracking-widest">{f}</div>
+            ))}
+          </div>
+        </div>
+        <div className="relative"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&w=800" className="rounded-[40px] shadow-2xl grayscale brightness-50 h-[500px] object-cover" /><div className="absolute inset-0 bg-[#ccff00]/10 mix-blend-overlay"></div></div>
+      </div>
+    </section>
+    
+    <section className="py-24 flex flex-col items-center bg-[#f5f5f7]"><button onClick={onBack} className="px-12 py-6 bg-black text-white rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-xl">Return to Portal</button></section>
+  </div>
+);
+
+const IndustriesPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="absolute inset-0 opacity-20 pointer-events-none"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000" className="w-full h-full object-cover" /></div>
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Strategic Verticals</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">SECTOR <br /> <span className="text-white/20 italic">SPECIFIC</span> <br /> INTELLIGENCE.</h2>
+      </div>
+    </section>
+    
+    <div className="space-y-32 py-32 px-6">
+      {INDUSTRIES_DATA.map((ind, i) => (
+        <section id={`industry-${ind.id}`} key={i} className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className={i % 2 === 0 ? '' : 'lg:order-2'}>
+            <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">{ind.title}</h3>
+            <p className="text-slate-500 text-lg leading-relaxed italic mb-8">{ind.overview}</p>
+            <div className="space-y-4">
+               {ind.problems.slice(0, 3).map(p => (<div key={p} className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-slate-400"><X size={14} className="text-red-500" /> {p}</div>))}
+               <div className="h-px bg-slate-100 my-4"></div>
+               {ind.solutions.slice(0, 3).map(s => (<div key={s} className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-black"><CheckCircle2 size={14} className="text-[#ccff00]" /> {s}</div>))}
             </div>
-            <p className="text-slate-400 text-xl font-light leading-relaxed max-w-md italic border-l-4 border-[#ccff00] pl-8">Protecting our employees, clients, public, and the ecosystem via zero-harm philosophy.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-             {[
-               { t: "Workplace Safety", l: ["Site-specific safety plans", "PPE enforcement protocols", "Toolbox talks & briefings"], i: <HardHat /> },
-               { t: "Environmental", l: ["Low-VOC / Eco-friendly materials", "Waste disposal protocols", "Noise & dust control"], i: <Leaf /> },
-               { t: "Emergency Ready", l: ["Response & fire protocols", "First aid & medical readiness", "Rapid incident investigation"], i: <Zap /> }
-             ].map((block, i) => (
-               <motion.div key={i} whileInView={{ y: 0, opacity: 1 }} initial={{ y: 50, opacity: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-16 bg-white/5 border border-white/10 rounded-[80px] hover:border-[#ccff00] transition-all group">
-                  <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center text-[#ccff00] mb-12 group-hover:scale-110 transition-transform">{block.i}</div>
-                  <h4 className="font-heading text-3xl font-black italic uppercase mb-8">{block.t}</h4>
-                  <ul className="space-y-4">
-                     {block.l.map((li, idx) => (
-                       <li key={idx} className="flex items-start gap-4 text-slate-400 text-sm italic font-medium">
-                          <div className="w-1.5 h-1.5 bg-[#ccff00] rounded-full mt-1.5"></div> {li}
-                       </li>
-                     ))}
-                  </ul>
-               </motion.div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Certifications & Standards */}
-      <section id="comp-certifications" className="py-48 px-8 lg:px-24 scroll-mt-24 bg-white overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-10">
-             <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">GLOBAL <br /> <span className="text-slate-300">BENCHMARK.</span></h3>
-             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">ISO ALIGNMENT & INDUSTRY ACCREDITATIONS</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-             {[
-               { n: "ISO 9001", d: "Quality Management Systems" },
-               { n: "ISO 14001", d: "Environmental Management" },
-               { n: "ISO 45001", d: "Occupational Health & Safety" },
-               { n: "LOCAL REGS", d: "Construction & Environmental Laws" }
-             ].map((iso, i) => (
-               <motion.div key={i} whileInView={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ delay: i * 0.2 }} className="p-12 bg-[#f5f5f7] rounded-[50px] flex flex-col items-center text-center gap-6 border-b-8 border-black hover:border-[#ccff00] transition-colors">
-                  <Award size={48} className="text-black" />
-                  <h4 className="font-heading text-4xl font-black italic">{iso.n}</h4>
-                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{iso.d}</p>
-               </motion.div>
-             ))}
-          </div>
-          
-          <div className="mt-32 p-16 bg-black text-white rounded-[80px] grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-             <div className="space-y-8">
-                <h4 className="font-heading text-4xl font-black italic uppercase">Internal <br /> Qualifications.</h4>
-                <p className="text-slate-400 font-light italic">KAVY ensures every workforce layer is qualified via our internal training academy, from skilled finishers to executive site supervisors.</p>
-             </div>
-             <div className="grid grid-cols-2 gap-6">
-                {['Worker Certification', 'Supervisor Quals', 'Safety Training', 'Recertification'].map(q => (
-                  <div key={q} className="p-8 border border-white/10 rounded-3xl text-center"><p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#ccff00]">{q}</p></div>
-                ))}
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Compliance & Regulations */}
-      <section id="comp-regulations" className="py-48 px-8 lg:px-24 scroll-mt-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-           <motion.div whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.8 }} viewport={{ once: true }} className="relative rounded-[100px] overflow-hidden aspect-[4/5] shadow-3xl group order-2 lg:order-1">
-              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&w=800" className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 transition-all duration-1000" alt="Regulations" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/80 to-transparent flex items-end p-16">
-                 <p className="text-white text-3xl font-heading font-black tracking-tight leading-tight uppercase italic border-l-4 border-[#ccff00] pl-8">OPERATING <br /> WITHIN THE <br /> LAW.</p>
-              </div>
-           </motion.div>
-           <motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: 100 }} viewport={{ once: true }} className="space-y-12 order-1 lg:order-2">
-             <div className="flex items-center gap-6 text-slate-400"><Scale size={32} /> <span className="font-black uppercase tracking-[0.4em] text-[11px]">System Registry 04</span></div>
-             <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">REGULATORY <br /> COMPLIANCE.</h3>
-             <div className="space-y-12">
-                {[
-                  { t: "Building Codes", i: <Home />, d: "Strict adherence to all local and international building standards." },
-                  { t: "Ethical Conduct", i: <Handshake />, d: "Anti-corruption policies and transparent procurement protocols." },
-                  { t: "Data Integrity", i: <Lock />, d: "Data protection and privacy policies for every client asset profile." }
-                ].map((reg, i) => (
-                  <div key={i} className="flex gap-8 items-start group">
-                     <div className="p-4 bg-[#f5f5f7] rounded-2xl group-hover:bg-[#ccff00] transition-colors">{reg.i}</div>
-                     <div className="space-y-2">
-                        <h4 className="font-black text-xl italic uppercase tracking-tighter">{reg.t}</h4>
-                        <p className="text-slate-500 font-light italic leading-relaxed">{reg.d}</p>
-                     </div>
-                  </div>
-                ))}
-             </div>
-           </motion.div>
-        </div>
-      </section>
-
-      {/* 5. Risk Management */}
-      <section id="comp-risk-management" className="py-48 px-8 lg:px-24 bg-[#f5f5f7] scroll-mt-24 overflow-hidden border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-10">
-             <h3 className="font-heading text-6xl md:text-[10rem] font-black uppercase tracking-tighter italic">RISK INTEL.</h3>
-             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">ANTICIPATING FAILURE BEFORE IT MANIFESTS</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-             {[
-               { t: "Identification", d: "Pre-project assessments and site inspections to map potential vulnerabilities." },
-               { t: "Assessment", d: "Severity and likelihood analysis for impact on safety, costs, and timelines." },
-               { t: "Mitigation", d: "Engineering controls, process adjustments, and stringent contingency planning." },
-               { t: "Monitoring", d: "Continuous sensor-led monitoring and rapid improvement loop actions." }
-             ].map((risk, i) => (
-               <motion.div key={i} whileInView={{ x: 0, opacity: 1 }} initial={{ x: i % 2 === 0 ? -50 : 50, opacity: 0 }} viewport={{ once: true }} className="flex gap-10 items-start p-12 bg-white rounded-[70px] shadow-sm hover:shadow-2xl transition-all duration-500">
-                  <div className="w-16 h-16 flex-shrink-0 bg-black text-[#ccff00] rounded-2xl flex items-center justify-center font-heading font-black text-2xl">0{i+1}</div>
-                  <div className="space-y-4">
-                     <h4 className="font-heading text-3xl font-black italic uppercase">{risk.t}</h4>
-                     <p className="text-slate-500 font-light italic leading-relaxed text-lg">{risk.d}</p>
-                  </div>
-               </motion.div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Commitment */}
-      <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="w-[1200px] h-[1200px] bg-[#ccff00]/10 rounded-full blur-[150px] absolute -top-[600px] left-1/2 -translate-x-1/2"></div>
-          </div>
-          <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10 text-white/10 text-center">TOTAL <br /> <span className="text-[#ccff00]">ACCOUNTABILITY.</span></h3>
-          <div className="flex flex-col sm:flex-row gap-10 relative z-10">
-             <button onClick={onBack} className="px-16 py-8 bg-[#ccff00] text-black rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-white transition-all shadow-3xl italic">HQ Main Portal</button>
-             <button className="px-16 py-8 border-4 border-white text-white rounded-[40px] font-black text-sm tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-all italic">Access Certifications</button>
-          </div>
-      </section>
+          <img src={ind.image} className="rounded-[40px] shadow-2xl grayscale brightness-75 h-[450px] object-cover" />
+        </section>
+      ))}
     </div>
-  );
-};
+    
+    <section className="py-24 flex flex-col items-center bg-black text-white px-8"><button onClick={onBack} className="px-12 py-6 bg-[#ccff00] text-black rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic">Return to HQ</button></section>
+  </div>
+);
 
-// --- FULL PAGE: SERVICES ---
+const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Impact Registry</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">PROJECTS <br /> & <span className="text-white/20">PORTFOLIO.</span></h2>
+      </div>
+    </section>
+    
+    <div className="py-32 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <motion.div key={i} whileHover={{ scale: 1.02 }} className="relative rounded-[50px] overflow-hidden aspect-video grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer shadow-xl group">
+            <img src={`https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&w=800&q=${i*10}`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-10 flex flex-col justify-end">
+              <span className="text-[#ccff00] font-black text-[9px] uppercase tracking-widest mb-2 italic">Regional Engagement 0{i}</span>
+              <h4 className="text-white font-heading text-2xl font-black italic uppercase">Asset Class Protection</h4>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+    
+    <section className="py-24 flex flex-col items-center bg-[#f5f5f7]"><button onClick={onBack} className="px-12 py-6 bg-black text-white rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-2xl">Return to Portal</button></section>
+  </div>
+);
+
+const CompliancePage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Governance</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">BUILT TO <br /> <span className="text-white/20">HIGHEST</span> <br /> STANDARDS.</h2>
+      </div>
+    </section>
+    
+    <section id="comp-qa-framework" className="py-24 px-6 bg-white border-b border-slate-100">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">QUALITY & <br /> GOVERNANCE.</h3>
+          <p className="text-slate-500 text-lg leading-relaxed italic mb-8">Every KAVY mission is governed by a strict framework of accountability and safety protocols.</p>
+          <div className="grid grid-cols-2 gap-4">
+            {['ISO 9001:2015', 'ISO 45001:2018', 'ISO 14001:2015', 'NIS Certified'].map(c => (
+              <div key={c} className="p-8 bg-[#f5f5f7] rounded-3xl text-center font-black italic border border-slate-200">{c}</div>
+            ))}
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1503387762-592dea58ef21?auto=format&w=800" className="rounded-[40px] shadow-2xl grayscale h-[450px] object-cover" />
+      </div>
+    </section>
+
+    <section className="py-24 flex flex-col items-center bg-[#f5f5f7]"><button onClick={onBack} className="px-12 py-6 bg-black text-white rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-xl">Return to Portal</button></section>
+  </div>
+);
+
+const ContactUsFullPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Strategic Support</span>
+        <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">GLOBAL <br /> <span className="text-white/20 italic">CONNECTIONS.</span></h2>
+      </div>
+    </section>
+    
+    <section id="cont-general" className="py-24 px-6 bg-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div>
+          <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">CONTACT HQ.</h3>
+          <div className="space-y-12">
+            {[ { l: "Executive Support", v: "+234 814 413 0329" }, 
+               { l: "Digital Intel Hub", v: "strategic@kavy.ltd" },
+               { l: "HQ Base", v: "Lagos, Nigeria" }].map((i, idx) => (
+              <div key={idx} className="group cursor-pointer">
+                <p className="text-[9px] font-black tracking-widest text-slate-400 mb-2 group-hover:text-black transition-colors uppercase italic">{i.l}</p>
+                <p className="text-2xl font-black italic group-hover:text-[#ccff00] transition-colors">{i.v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-[#f5f5f7] p-12 rounded-[50px] shadow-sm">
+          <form className="space-y-8">
+            <div className="space-y-2">
+              <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Strategic Contact</label>
+              <input placeholder="NAME_IDENTIFIER" className="w-full bg-white rounded-3xl p-6 text-xs font-bold italic border-2 border-transparent focus:border-[#ccff00] focus:outline-none transition-all" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Mission Brief</label>
+              <textarea rows={4} placeholder="SYNOPSIS" className="w-full bg-white rounded-3xl p-6 text-xs font-bold italic border-2 border-transparent focus:border-[#ccff00] focus:outline-none transition-all"></textarea>
+            </div>
+            <button className="w-full py-8 bg-black text-white font-black uppercase text-xs rounded-3xl hover:bg-[#ccff00] hover:text-black transition-all italic shadow-2xl">Transmit Brief</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="cont-locations" className="py-24 bg-[#f5f5f7] px-6">
+      <div className="max-w-7xl mx-auto">
+        <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-16 text-center">OPERATIONAL HUBS.</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {[{ c: "Lagos, Nigeria", a: "Main Systems District HQ", i: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5" }, 
+            { c: "Abuja Regional", a: "Federal Asset Division", i: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" }].map((l, i) => (
+            <div key={i} className="relative rounded-[50px] overflow-hidden aspect-[16/10] grayscale group hover:grayscale-0 transition-all duration-700 shadow-xl">
+              <img src={l.i} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black p-10 flex flex-col justify-end text-white">
+                <h4 className="font-black italic text-2xl uppercase">{l.c}</h4>
+                <p className="text-xs opacity-60 italic mt-2 uppercase tracking-widest">{l.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section className="py-24 flex flex-col items-center bg-black text-white px-8"><button onClick={onBack} className="px-12 py-6 bg-[#ccff00] text-black rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-2xl">Back to HQ Portal</button></section>
+  </div>
+);
+
 const ServicesPage = ({ onBack }: { onBack: () => void }) => (
   <div className="bg-white min-h-screen">
-    <section className="bg-[#f5f5f7] px-8 lg:px-24 py-48 lg:py-72 border-b-8 border-black"><div className="max-w-7xl mx-auto"><motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }}><span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] bg-black px-8 py-3 rounded-2xl mb-12 inline-block uppercase italic">Capability Matrix</span><h2 className="font-heading font-black text-6xl md:text-[12rem] tracking-tighter leading-none mb-16 uppercase italic">SYSTEMIC <br /> SOLUTIONS.</h2><p className="text-slate-500 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">Integrated asset lifecycle engineering, from advanced simulation to high-precision manufacturing.</p></motion.div></div></section>
-    <div className="space-y-64 py-64 px-6">{FULL_SERVICES.map((serv, i) => (<section id={`serv-${serv.id}`} key={serv.id} className="max-w-7xl mx-auto scroll-mt-24"><div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center"><div className="lg:col-span-5 space-y-12"><div className="flex items-center gap-8"><div className="p-8 bg-black text-[#ccff00] rounded-[40px] shadow-2xl scale-110">{serv.icon}</div><div><span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">System Code 0{i+1}</span><h3 className="font-heading text-5xl md:text-7xl font-black uppercase tracking-tight italic">{serv.title}</h3></div></div><p className="text-slate-500 text-xl font-light leading-relaxed italic">High-durability engineered solutions designed for the African context.</p></div><div className="lg:col-span-7"><div className="w-full h-[400px] md:h-[750px] rounded-[100px] overflow-hidden shadow-3xl bg-slate-100 group"><img src={serv.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" alt={serv.title} /></div></div></div></section>))}</div>
-    <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8"><h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8">POWER <br /> OF <span className="text-[#ccff00]">SEVEN.</span></h3><button onClick={onBack} className="px-16 py-8 bg-white text-black rounded-[30px] font-black text-sm tracking-[0.2em] uppercase hover:bg-[#ccff00] transition-all shadow-2xl italic">Main Portal</button></section>
+    <section className="bg-[#f5f5f7] px-6 py-48 border-b-8 border-black text-center">
+      <h2 className="font-heading font-black text-4xl md:text-6xl tracking-tighter uppercase italic leading-none mb-8">CAPABILITY <br /> <span className="text-[#ccff00] bg-black px-8 py-2 inline-block mt-4">MATRIX.</span></h2>
+      <p className="text-slate-400 text-lg uppercase font-black tracking-widest italic">7 CORE BUILT-ENVIRONMENT SYSTEMS</p>
+    </section>
+    
+    <div className="space-y-32 py-32 px-6 bg-white">
+      {FULL_SERVICES.map((s, i) => (
+        <section id={`serv-${s.id}`} key={i} className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className={i % 2 !== 0 ? 'lg:order-2' : ''}>
+            <div className="flex items-center gap-6 mb-8">
+              <div className="p-6 bg-black text-[#ccff00] rounded-3xl shadow-xl">{s.icon}</div>
+              <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic">{s.title}</h3>
+            </div>
+            <p className="text-slate-500 text-lg leading-relaxed italic mb-8">Specialized systems engineering for high-durability assets across African climates.</p>
+            <div className="p-6 border-l-4 border-black bg-[#f5f5f7] rounded-r-3xl"><p className="text-xs font-black uppercase tracking-widest italic">Precision Execution • System Nominal</p></div>
+          </div>
+          <motion.div whileHover={{ scale: 1.02 }} className="rounded-[60px] shadow-2xl overflow-hidden h-[450px] border border-slate-100">
+            <img src={s.img} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+          </motion.div>
+        </section>
+      ))}
+    </div>
+    
+    <section className="py-24 flex flex-col items-center bg-black text-white px-8"><button onClick={onBack} className="px-16 py-8 bg-white text-black rounded-[40px] font-black text-sm tracking-[0.2em] uppercase hover:bg-[#ccff00] transition-all shadow-2xl italic">Main Portal</button></section>
   </div>
 );
 
