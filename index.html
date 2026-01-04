@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAVY LTD | Integrated Building Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-white: #ffffff;
+            --brand-ash: #f5f5f7;
+            --brand-lemon: #ccff00;
+            --brand-dark: #1d1d1f;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--brand-white);
+            color: var(--brand-dark);
+            height: 100%;
+        }
+        .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* Visible and Aesthetic Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        ::-webkit-scrollbar-thumb { background: #1d1d1f; border-radius: 10px; border: 2px solid var(--brand-ash); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand-lemon); }
+
+        .section-snap {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        .snap-item {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .lemon-gradient-text {
+            background: linear-gradient(135deg, #1d1d1f 0%, #ccff00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover { animation-play-state: paused; }
+    </style>
+  <script type="module" crossorigin src="/kavy-ltd/assets/index-CNQfbIUy.js"></script>
+</head>
+<body class="antialiased selection:bg-[#ccff00] selection:text-black overflow-hidden">
+    <div id="root" class="h-full"></div>
+</body>
+</html>
