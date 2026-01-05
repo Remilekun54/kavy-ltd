@@ -17,13 +17,13 @@ import AIConsultant from './components/AIConsultant';
 
 const KavyLogo = ({ className }: { className?: string }) => (
   <img
-    src="public/images/Kavy Logo.jpeg"
+    // Remove "public" and use %20 for the space
+    src="/images/KavyLogo.jpeg" 
     alt="Kavy Logo"
     className={className}
     style={{ width: '100px', height: 'auto', borderRadius: '12px' }}
   />
 );
-
 
 const SECTIONS = [
   { id: 'hero', label: 'Main Portal', icon: <Box size={16} /> },
