@@ -10,20 +10,22 @@ import {
   History, Eye, Shield, Award, HelpCircle, BriefcaseBusiness, TrendingDown, TrendingUp,
   Search, Workflow, Leaf, Lock, Handshake, Microscope, Landmark, Truck, Home,
   LineChart, Monitor, Terminal, Share2, Activity, DatabaseZap, ArrowRight,
-  Filter, Map as MapIcon, Calendar, Maximize2, ClipboardCheck, AlertTriangle, FileText, Scale
+  Filter, Map as MapIcon, Calendar, Maximize2, ClipboardCheck, AlertTriangle, FileText, Scale,
+  Headset
 } from 'lucide-react';
 import AIConsultant from './components/AIConsultant';
 
 
 const KavyLogo = ({ className }: { className?: string }) => (
   <img
-    // Remove "public" and use %20 for the space
-    src="/images/KavyLogo.jpeg" 
+    src="./images/KavyLogo.jpeg" 
     alt="Kavy Logo"
     className={className}
     style={{ width: '100px', height: 'auto', borderRadius: '12px' }}
   />
 );
+
+
 
 const SECTIONS = [
   { id: 'hero', label: 'Main Portal', icon: <Box size={16} /> },
@@ -66,6 +68,12 @@ const COMPLIANCE_SUB_SECTIONS = [
   { id: 'certifications', label: 'Certifications', icon: <Award size={14} /> },
   { id: 'regulations', label: 'Regulations', icon: <Scale size={14} /> },
   { id: 'risk-management', label: 'Risk Intelligence', icon: <AlertTriangle size={14} /> }
+];
+
+const CONTACT_SUB_SECTIONS = [
+  { id: 'general', label: 'Contact Us', icon: <ClipboardCheck size={14} /> },
+  { id: 'quote', label: 'Quotes', icon: <ShieldCheck size={14} /> },
+  { id: 'locations', label: 'Locations', icon: <Award size={14} /> },
 ];
 
 const INDUSTRIES_DATA = [
@@ -142,7 +150,7 @@ const FULL_SERVICES = [
 ];
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'services' | 'industries' | 'technology' | 'portfolio' | 'compliance'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'services' | 'industries' | 'technology' | 'portfolio' | 'compliance' | 'contact-page'>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [isHomeExpanded, setIsHomeExpanded] = useState(false);
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
@@ -151,6 +159,7 @@ const App: React.FC = () => {
   const [isTechExpanded, setIsTechExpanded] = useState(false);
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const [isComplianceExpanded, setIsComplianceExpanded] = useState(false);
+  const [isContactExpanded, setIsContactExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -219,6 +228,14 @@ const App: React.FC = () => {
     }, 100);
   };
 
+  const navigateToContactSection = (sectionId: string) => {
+    setCurrentView('contact-page');
+    setTimeout(() => {
+      const el = document.getElementById(`contact-${sectionId}`);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="relative h-screen w-full flex overflow-hidden bg-white text-[#1d1d1f]">
       <div className="fixed top-8 left-8 z-[100] flex flex-col pointer-events-none">
@@ -276,6 +293,11 @@ const App: React.FC = () => {
           ) : currentView === 'compliance' ? (
             <motion.div key="compliance" className="h-full w-full overflow-y-auto bg-white">
               <CompliancePage onBack={() => setCurrentView('home')} />
+              <Footer />
+            </motion.div>
+          ) : currentView === 'contact-page' ? (
+            <motion.div key="contact-page" className="h-full w-full overflow-y-auto bg-white">
+              <ContactUsFullPage onBack={() => setCurrentView('home')} />
               <Footer />
             </motion.div>
           ) : (
@@ -401,6 +423,20 @@ const App: React.FC = () => {
                 ))}
               </NavGroup>
 
+              <NavGroup 
+              label="CONTACT" sub="Strategic Link" icon={<Headset size={18} />}
+              isOpen={isContactExpanded} onToggle={() => { 
+                setIsContactExpanded(!isContactExpanded); 
+                setIsHomeExpanded(false); setIsAboutExpanded(false); setIsServicesExpanded(false); setIsTechExpanded(false); setIsPortfolioExpanded(false); setIsComplianceExpanded(false); 
+                }}
+              >
+                
+                {CONTACT_SUB_SECTIONS.map(ind => (
+                  <button key={ind.id} onClick={() => navigateToContactSection(ind.id)} className="p-3 text-left font-black uppercase text-[9px] tracking-widest text-slate-500 hover:text-black hover:bg-slate-200 rounded-xl transition-all flex items-center gap-2">
+                    {ind.icon} {ind.label}
+                  </button>
+                ))}
+              </NavGroup>
               <NavGroup
                 label="SERVICES"
                 sub="7 Systems"
@@ -415,6 +451,7 @@ const App: React.FC = () => {
                   setIsTechExpanded(false);
                   setIsPortfolioExpanded(false);
                   setIsComplianceExpanded(false);
+                  setIsContactExpanded(false);
                   setIsServicesExpanded(nextState);
                 }}
               >
@@ -698,7 +735,7 @@ const HomePortfolioSection = ({ id, onAction }: any) => (
         {[
           { title: 'Lagos Smart City', cat: 'SPACES', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&w=800' },
           { title: 'Lifecycle AI Hub', cat: 'SYSTEMS', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&w=800' },
-          { title: 'Painted House', cat: 'COATINGS', img: 'public/images/h3.jpeg' }
+          { title: 'Painted House', cat: 'COATINGS', img: './images/h3.jpeg' }
         ].map((item, i) => (
           <motion.div key={i} onClick={onAction} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="group relative h-[300px] md:h-[420px] rounded-[70px] overflow-hidden bg-white shadow-3xl cursor-pointer">
             <img src={item.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={item.title} />
@@ -1311,6 +1348,69 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
   );
 };
 
+// -- NEW CONTACTUS PAGE ---
+const ContactUsFullPage = ({ onBack }: { onBack: () => void }) => (
+  <div className="bg-white min-h-screen">
+    <section className="bg-black text-white px-6 py-40 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] font-black uppercase tracking-[0.4em] text-[#ccff00] mb-8 block italic">Strategic Support</motion.span>
+        <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading font-black text-4xl md:text-5xl lg:text-6xl tracking-tighter leading-tight mb-12 uppercase italic">GLOBAL <br /> <span className="text-white/20">CONNECTIONS.</span></motion.h2>
+      </div>
+    </section>
+    
+    <section id="cont-general" className="py-24 px-6 bg-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-8">CONTACT HQ.</h3>
+          <div className="space-y-12">
+            {[ { l: "Executive Support", v: "+234 814 413 0329" }, 
+               { l: "Digital Intel Hub", v: "strategic@kavy.ltd" },
+               { l: "HQ Base", v: "Lagos, Nigeria" }].map((i, idx) => (
+              <div key={idx} className="group cursor-pointer">
+                <p className="text-[9px] font-black tracking-widest text-slate-400 mb-2 group-hover:text-black transition-colors uppercase italic">{i.l}</p>
+                <p className="text-2xl font-black italic group-hover:text-[#ccff00] transition-colors">{i.v}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-[#f5f5f7] p-12 rounded-[50px] shadow-sm">
+          <form className="space-y-8">
+            <div className="space-y-2">
+              <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Strategic Contact</label>
+              <input placeholder="NAME_IDENTIFIER" className="w-full bg-white rounded-3xl p-6 text-xs font-bold italic border-2 border-transparent focus:border-[#ccff00] focus:outline-none transition-all" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 ml-4">Mission Brief</label>
+              <textarea rows={4} placeholder="SYNOPSIS" className="w-full bg-white rounded-3xl p-6 text-xs font-bold italic border-2 border-transparent focus:border-[#ccff00] focus:outline-none transition-all"></textarea>
+            </div>
+            <button className="w-full py-8 bg-black text-white font-black uppercase text-xs rounded-3xl hover:bg-[#ccff00] hover:text-black transition-all italic shadow-2xl">Transmit Brief</button>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+
+    <section id="cont-locations" className="py-24 bg-[#f5f5f7] px-6">
+      <div className="max-w-7xl mx-auto">
+        <h3 className="font-heading text-3xl md:text-5xl font-black uppercase italic mb-16 text-center">OPERATIONAL HUBS.</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {[{ c: "Lagos, Nigeria", a: "Main Systems District HQ", i: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5" }, 
+            { c: "Abuja Regional", a: "Federal Asset Division", i: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" }].map((l, i) => (
+            <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.2 }} viewport={{ once: true }} className="relative rounded-[50px] overflow-hidden aspect-[16/10] grayscale group hover:grayscale-0 transition-all duration-700 shadow-xl">
+              <img src={l.i} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={l.c} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black p-10 flex flex-col justify-end text-white">
+                <h4 className="font-black italic text-2xl uppercase">{l.c}</h4>
+                <p className="text-xs opacity-60 italic mt-2 uppercase tracking-widest">{l.a}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section className="py-24 flex flex-col items-center bg-black text-white px-8"><button onClick={onBack} className="px-12 py-6 bg-[#ccff00] text-black rounded-[40px] font-black text-xs tracking-[0.2em] uppercase italic shadow-2xl">Back to HQ Portal</button></section>
+  </div>
+);
+
 // --- NEW FULL PAGE: QUALITY, SAFETY & COMPLIANCE ---
 const CompliancePage = ({ onBack }: { onBack: () => void }) => {
   return (
@@ -1540,5 +1640,14 @@ const ServicesPage = ({ onBack }: { onBack: () => void }) => (
     <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8"><h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8">POWER <br /> OF <span className="text-[#ccff00]">SEVEN.</span></h3><button onClick={onBack} className="px-16 py-8 bg-white text-black rounded-[30px] font-black text-sm tracking-[0.2em] uppercase hover:bg-[#ccff00] transition-all shadow-2xl italic">Main Portal</button></section>
   </div>
 );
+
+
+
+
+
+
+
+
+
 
 export default App;
