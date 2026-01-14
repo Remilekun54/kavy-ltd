@@ -76,7 +76,7 @@ const KavyLogo = ({ className }: { className?: string }) => (
     src="./images/KavyLogo.jpeg"
     alt="Kavy Logo"
     className={className}
-    style={{ width: "100px", height: "auto", borderRadius: "12px" }}
+    style={{ width: "80px", height: "auto", borderRadius: "12px" }}
   />
 );
 
@@ -376,7 +376,7 @@ const App: React.FC = () => {
     | "compliance"
     | "contact-page"
   >("home");
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHomeExpanded, setIsHomeExpanded] = useState(false);
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const [isIndustriesExpanded, setIsIndustriesExpanded] = useState(false);
@@ -467,20 +467,19 @@ const App: React.FC = () => {
 
   return (
     <div className="relative h-screen w-full flex overflow-hidden bg-white text-[#1d1d1f]">
-      <div className="fixed top-8 left-8 z-[100] flex flex-col pointer-events-none">
+      {/* 1. Change top-8 to top-4 on mobile to give more room */}
+      <div className="fixed top-4 left-4 md:top-8 md:left-8 z-[100] flex flex-col pointer-events-none">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex items-center gap-4"
+          /* 2. Added mb-6 to create a gap below the logo area */
+          className="flex items-center gap-4 mb-6"
         >
-          <KavyLogo className="w-10 h-10 text-black" />
+          {/* 3. Responsive sizing: w-8 (smaller) on mobile, w-12 on desktop */}
+          <KavyLogo className="w-8 h-8 md:w-12 md:h-12 text-black" />
+
           <div className="hidden sm:block">
-            <h1 className="font-heading font-black text-xl tracking-tighter uppercase">
-              KAVY LTD
-            </h1>
-            <p className="text-[8px] tracking-[0.4em] text-slate-400 uppercase font-black">
-              Building Intelligence
-            </p>
+            {/* Text content stays hidden on mobile as per your current code */}
           </div>
         </motion.div>
       </div>
@@ -992,7 +991,7 @@ const HeroSection = ({ id, onAction }: any) => {
           <motion.img
             key={currentSlide}
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.5, scale: 1 }}
+            animate={{ opacity: 0.8, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             src={slides[currentSlide]}
@@ -1019,7 +1018,7 @@ const HeroSection = ({ id, onAction }: any) => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-heading font-black text-5xl md:text-8xl tracking-tighter leading-[0.85] mb-12 uppercase italic text-white"
+          className="font-heading font-black text-5xl md:text-6xl tracking-tighter leading-[0.85] mb-12 uppercase italic text-white"
         >
           REDEFINING <br />{" "}
           <span className="lemon-gradient-text italic">INTELLIGENT</span> <br />{" "}
@@ -1090,7 +1089,7 @@ const VisionSummarySection = ({ id, onAction }: any) => (
         <span className="text-[#ccff00] font-black text-[10px] tracking-[0.5em] uppercase px-6 py-3 bg-black rounded-lg inline-block italic">
           About Kavy
         </span>
-        <h3 className="font-heading text-4xl md:text-7xl font-black tracking-tight leading-none uppercase italic">
+        <h3 className="font-heading text-4xl md:text-6xl font-black tracking-tight leading-none uppercase italic">
           BUILT-ENVIRONMENT <br /> SYSTEMS.
         </h3>
         <p className="text-slate-500 text-xl md:text-1xl font-light leading-relaxed italic">
@@ -1648,7 +1647,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
       <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.15 }}
+          animate={{ scale: 1, opacity: 0.6 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 pointer-events-none"
         >
@@ -1690,12 +1689,12 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">
               Systemic Built Environments
             </span>
-            <h2 className="font-heading font-black text-6xl md:text-[6rem] tracking-tighter leading-[0.9] mb-16 uppercase">
+            <h2 className="font-heading font-black text-6xl md:text-[5rem] tracking-tighter leading-[0.9] mb-16 uppercase">
               INTELLIGENCE <br />{" "}
-              <span className="text-white/20 italic">BEYOND</span> <br />{" "}
+              <span className="text-[#ccff00] italic">BEYOND</span> <br />{" "}
               SURFACES.
             </h2>
-            <p className="text-slate-400 text-xl md:text-2xl font-light leading-tight max-w-5xl italic">
+            <p className="text-slate-400 text-xl md:text-1xl font-light leading-tight max-w-5xl italic">
               KAVY is not only a painting company. KAVY is a built-environment
               systems company designed to redefine how Africa protects and
               maintains its physical assets.
@@ -1722,7 +1721,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
                   The Genesis of KavyLtd
                 </span>
               </div>
-              <h3 className="font-heading text-5xl md:text-7xl font-black uppercase tracking-tight leading-none italic">
+              <h3 className="font-heading text-5xl md:text-6xl font-black uppercase tracking-tight leading-none italic">
                 WHY KAVY <br /> EXISTS.
               </h3>
               <div className="p-12 bg-[#1d1d1f] text-white rounded-[70px] shadow-3xl relative overflow-hidden group">
@@ -1925,7 +1924,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
                   Board of Teams
                 </span>
               </div>
-              <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic leading-none">
+              <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
                 THE ARCHITECTS.
               </h3>
             </div>
@@ -2000,7 +1999,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[6rem] font-black uppercase tracking-tighter italic">
+            <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
               THE EDGE.
             </h3>
             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
@@ -2059,8 +2058,8 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
         className="py-24 md:py-32 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-32">
-          <div className="lg:col-span-5 space-y-16">
-            <h3 className="font-heading text-6xl md:text-7xl font-black uppercase tracking-tight leading-none italic">
+          <div className="lg:col-span-4 space-y-16">
+            <h3 className="font-heading text-6xl md:text-6xl font-black uppercase tracking-tight leading-none italic">
               OPERATING <br /> MODEL.
             </h3>
             <p className="text-slate-500 text-xl md:text-1xl font-light leading-relaxed italic">
@@ -2068,8 +2067,8 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
               intelligence to vertically integrated manufacturing.
             </p>
           </div>
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="lg:col-span-8 flex flex-col justify-center pr-0 lg:pr-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
                 {
                   title: "Strategic Design",
@@ -2119,7 +2118,7 @@ const AboutUsPage = ({ onBack }: { onBack: () => void }) => {
       </section>
 
       <section className="py-48 flex flex-col items-center gap-16 text-center bg-[#f5f5f7]">
-        <h3 className="font-heading text-6xl md:text-[7rem] font-black tracking-tighter uppercase italic leading-[0.9]">
+        <h3 className="font-heading text-6xl md:text-[5rem] font-black tracking-tighter uppercase italic leading-[0.9]">
           <span
             className="inline-block"
             style={{
@@ -2155,14 +2154,14 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
       <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
+          animate={{ scale: 1, opacity: 0.7 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 pointer-events-none"
         >
           <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&w=2000"
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&w=2000"
             className="w-full h-full object-cover"
-            alt="Data"
+            alt="Technology Network"
           />
         </motion.div>
         <div className="max-w-7xl mx-auto relative z-10">
@@ -2198,7 +2197,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
             </span>
             <h2 className="font-heading font-black text-6xl md:text-[6rem] tracking-tighter leading-[0.9] mb-16 uppercase ">
               DIGITIZING <br />{" "}
-              <span className="text-white/20 italic">EVERY</span> <br />{" "}
+              <span className="text-[#ccff00] italic">EVERY</span> <br />{" "}
               STRUCTURE.
             </h2>
             <p className="text-slate-400 text-xl md:text-1xl font-light leading-tight max-w-5xl italic">
@@ -2227,7 +2226,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
                 System 01
               </span>
             </div>
-            <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic leading-none">
+            <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
               KAVY SYSTEMS <br /> PLATFORM.
             </h3>
             <p className="text-slate-500 text-xl font-light leading-relaxed italic">
@@ -2236,10 +2235,12 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
+                { t: "Unicorn-Tech3 Academy", d: "School of Tech." },
                 { t: "Asset Registry", d: "Centralized ledger." },
                 { t: "Performance Ops", d: "Tracking every surface." },
                 { t: "Automation", d: "Scheduled workflows." },
                 { t: "IoT Monitoring", d: "Sensor-led insights." },
+                { t: "HourPay", d: "Revolutionizing Payment." },
               ].map((c, i) => (
                 <div
                   key={i}
@@ -2260,10 +2261,10 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
             className="relative rounded-[100px] overflow-hidden h-[500px] md:h-[800px] shadow-3xl"
           >
             <img
-              src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&w=1200"
-              className="w-full h-full object-cover grayscale brightness-50"
-              alt="Backbone"
-            />
+  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&w=2000"
+  className="w-full h-full object-cover"
+  alt="Fintech Interface"
+/>
           </motion.div>
         </div>
       </section>
@@ -2297,7 +2298,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
                 System 02
               </span>
             </div>
-            <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+            <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
               AI DESIGN & <br /> VISUALIZATION.
             </h3>
             <ul className="space-y-6">
@@ -2308,7 +2309,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
               ].map((v, i) => (
                 <li
                   key={i}
-                  className="flex items-center gap-6 text-black font-black uppercase text-sm tracking-widest italic border-b border-black/10 pb-4"
+                  className="flex items-center gap-6 text-black font-black uppercase text-sm tracking-widest italic border-b border-black/10 pb-2"
                 >
                   <div className="w-2 h-2 bg-[#ccff00]"></div> {v}
                 </li>
@@ -2334,7 +2335,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
             <motion.h3
               whileInView={{ y: 0, opacity: 1 }}
               initial={{ y: 50, opacity: 0 }}
-              className="font-heading text-6xl md:text-[10rem] font-black uppercase tracking-tighter italic"
+              className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic"
             >
               PREDICTIVE INTEL.
             </motion.h3>
@@ -2398,7 +2399,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
                 System 04
               </span>
             </div>
-            <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+            <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
               REAL-TIME <br /> DATA HUBS.
             </h3>
             <p className="text-white/40 text-xl font-light leading-relaxed italic">
@@ -2406,31 +2407,41 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
               measurable, reportable systems with live performance feeds.
             </p>
             <div className="space-y-8 border-t border-white/10 pt-12">
-              {[
-                "Asset health scores",
-                "Lifecycle cost tracking",
-                "ESG compliance reporting",
-              ].map((d, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-center group"
-                >
-                  <span className="text-white/60 font-black uppercase text-[11px] tracking-widest">
-                    {d}
-                  </span>
-                  <div className="flex gap-1 group-hover:gap-2 transition-all">
-                    {[...Array(5)].map((_, idx) => (
-                      <div
-                        key={idx}
-                        className={`w-4 h-1 ${
-                          idx < 4 ? "bg-[#ccff00]" : "bg-white/10"
-                        }`}
-                      ></div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+  {[
+    { label: "Asset health scores", value: "98.2%" },
+    { label: "Lifecycle cost tracking", value: "24.5M" },
+    { label: "ESG compliance reporting", value: "100%" },
+  ].map((d, i) => (
+    <div
+      key={i}
+      className="flex justify-between items-center group"
+    >
+      <div className="flex items-baseline gap-4">
+        {/* The Figure/Number */}
+        <span className="text-[#ccff00] font-mono font-bold text-lg">
+          {d.value}
+        </span>
+        
+        {/* The Label */}
+        <span className="text-white/60 font-black uppercase text-[11px] tracking-widest">
+          {d.label}
+        </span>
+      </div>
+
+      {/* The Visual Bar Indicator */}
+      <div className="flex gap-1 group-hover:gap-2 transition-all">
+        {[...Array(5)].map((_, idx) => (
+          <div
+            key={idx}
+            className={`w-4 h-1 ${
+              idx < 4 ? "bg-[#ccff00]" : "bg-white/10"
+            }`}
+          ></div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -2472,10 +2483,10 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
             className="relative rounded-[100px] overflow-hidden h-[500px] md:h-[800px] shadow-3xl group"
           >
             <img
-              src="https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&w=1200"
-              className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-1000"
-              alt="CMS"
-            />
+  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=1200"
+  className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-1000"
+  alt="Infrastructure Lifecycle"
+/>
             <div className="absolute inset-0 bg-gradient-to-tr from-black/60 to-transparent flex items-end p-16">
               <p className="text-white text-3xl font-heading font-black tracking-tight leading-tight uppercase italic border-l-4 border-[#ccff00] pl-8">
                 SINGLE SOURCE <br /> OF TRUTH.
@@ -2494,10 +2505,10 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
                 System 05
               </span>
             </div>
-            <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+            <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
               LIFECYCLE <br /> CMS.
             </h3>
-            <p className="text-slate-500 text-xl font-light leading-relaxed italic">
+            <p className="text-slate-500 text-1xl font-light leading-relaxed italic ">
               A comprehensive content management system for every square inch of
               your infrastructure, archiving history, and planning future
               interventions.
@@ -2535,7 +2546,7 @@ const TechnologyPage = ({ onBack }: { onBack: () => void }) => {
       </section>
 
       <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8 relative overflow-hidden">
-        <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] relative z-10">
+        <h3 className="font-heading text-6xl md:text-[6rem] font-black tracking-tighter uppercase italic leading-[0.9] relative z-10">
           THE <br /> <span className="text-[#ccff00]">FUTURE</span> <br /> IS
           DIGITAL.
         </h3>
@@ -2559,15 +2570,15 @@ const IndustriesPage = ({ onBack }: { onBack: () => void }) => {
       <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
+          animate={{ scale: 1, opacity: 0.7 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 pointer-events-none"
         >
           <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&w=2000"
-            className="w-full h-full object-cover"
-            alt="Built Environment"
-          />
+  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&w=2000"
+  className="w-full h-full object-cover"
+  alt="Automated Industrial Hub"
+/>
         </motion.div>
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -2578,12 +2589,12 @@ const IndustriesPage = ({ onBack }: { onBack: () => void }) => {
             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">
               ASSET CLASSES & SECTORS
             </span>
-            <h2 className="font-heading font-black text-6xl md:text-[12rem] tracking-tighter leading-[0.7] mb-16 uppercase">
+            <h2 className="font-heading font-black text-6xl md:text-[5rem] tracking-tighter leading-[0.8] mb-16 uppercase">
               STRATEGIC <br />{" "}
-              <span className="text-white/20 italic">MARKET</span> <br />{" "}
+              <span className="text-[#ccff00] italic">MARKET</span> <br />{" "}
               VERTICALS.
             </h2>
-            <p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">
+            <p className="text-slate-400 text-xl md:text-2xl font-light leading-tight max-w-5xl italic">
               KAVY delivers specialized built-environment intelligence across
               government, corporate, residential, and industrial sectors.
             </p>
@@ -2611,10 +2622,10 @@ const IndustriesPage = ({ onBack }: { onBack: () => void }) => {
                     Sector Code 0{i + 1}
                   </span>
                 </div>
-                <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+                <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
                   {ind.title}
                 </h3>
-                <p className="text-slate-500 text-xl font-light leading-relaxed italic">
+                <p className="text-slate-500 text-1xl font-light leading-relaxed italic">
                   {ind.overview}
                 </p>
                 <div className="space-y-12">
@@ -2680,7 +2691,7 @@ const IndustriesPage = ({ onBack }: { onBack: () => void }) => {
       </div>
 
       <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8 relative overflow-hidden">
-        <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10">
+        <h3 className="font-heading text-6xl md:text-[5rem] font-black tracking-tighter uppercase italic leading-[0.9] mb-8 relative z-10">
           MARKET <br /> <span className="text-[#ccff00]">INTELLIGENCE.</span>
         </h3>
         <div className="flex flex-col sm:flex-row gap-10 relative z-10">
@@ -2750,7 +2761,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
       <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.25 }}
+          animate={{ scale: 1, opacity: 0.7 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 pointer-events-none"
         >
@@ -2769,11 +2780,11 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic">
               Impact Log & Execution Registry
             </span>
-            <h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase italic">
+            <h2 className="font-heading font-black text-6xl md:text-[5rem] tracking-tighter leading-[0.9] mb-16 uppercase italic">
               PROJECTS <br /> &{" "}
-              <span className="text-white/20">PORTFOLIO.</span>
+              <span className="text-[#ccff00] ">PORTFOLIO.</span>
             </h2>
-            <p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl mx-auto italic">
+            <p className="text-slate-400 text-xl md:text-3xl font-light leading-tight max-w-5xl mx-auto italic">
               Proven Execution. Measurable Impact. Trusted Outcomes.
             </p>
           </motion.div>
@@ -2812,7 +2823,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto space-y-48">
           <div className="text-center md:text-left">
-            <h3 className="font-heading text-5xl md:text-9xl font-black uppercase italic tracking-tight mb-10">
+            <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic tracking-tight mb-10">
               FLAGSHIP <br /> LOGS.
             </h3>
           </div>
@@ -2838,7 +2849,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
                     Featured Engagement
                   </span>
                 </div>
-                <h4 className="font-heading text-4xl md:text-7xl font-black italic uppercase leading-none">
+                <h4 className="font-heading text-4xl md:text-6xl font-black italic uppercase leading-none">
                   {proj.name}
                 </h4>
                 <div className="grid grid-cols-2 gap-10 border-y border-slate-100 py-10">
@@ -2910,63 +2921,121 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
         className="py-48 bg-slate-50 px-8 lg:px-24 scroll-mt-24 overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">
-              VISUAL <br /> <span className="text-slate-300">TRANSFORM.</span>
-            </h3>
-            <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
-              PHASE TRANSITION LOGS
-            </p>
+  <div className="text-center mb-32 space-y-10">
+    <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
+      VISUAL <br /> <span className="text-slate-300">TRANSFORM.</span>
+    </h3>
+    <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
+      PHASE TRANSITION LOGS
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
+    {[
+      {
+        title: "Infrastructure Decay → Protection",
+        desc: "Corrosion control on major bridge assets.",
+        images: [
+          "./images/h3.jpeg",
+          "./images/h2.jpeg",
+          "./images/01.jpeg",
+          "./images/02.jpeg",
+          "./images/03.jpeg",
+          "./images/04.jpeg",
+          "./images/05.jpeg",
+          "./images/06.jpeg",
+          "./images/07.jpeg",
+          "./images/17.jpeg",
+        ],
+      },
+      {
+        title: "Generic Shell → Intelligent Space",
+        desc: "Digital fit-out and smart coating integration.",
+        images: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800",
+          "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&w=800",
+          "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&w=800",
+          "./images/08.jpeg",
+          "./images/09.jpeg",
+          "./images/10.jpeg",
+          "./images/11.jpeg",
+          "./images/12.jpeg",
+          "./images/13.jpeg",
+          "./images/14.jpeg",
+          "./images/15.jpeg",
+          "./images/16.jpeg",
+        ],
+      },
+    ].map((project, i) => {
+      // Internal State for the Carousel
+      const [index, setIndex] = React.useState(0);
+
+      return (
+        <div key={i} className="space-y-10">
+          <div className="relative rounded-[80px] overflow-hidden aspect-video shadow-2xl group bg-black">
+            
+            {/* Navigation Controls */}
+            <div className="absolute inset-0 z-20 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-all">
+              <button 
+                onClick={() => setIndex((prev) => (prev - 1 + project.images.length) % project.images.length)}
+                className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-colors"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => setIndex((prev) => (prev + 1) % project.images.length)}
+                className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-colors"
+              >
+                →
+              </button>
+            </div>
+
+            {/* Top Badge Info */}
+            <div className="absolute top-8 left-8 z-20 bg-black/80 backdrop-blur-md px-6 py-2 rounded-full text-[9px] font-black uppercase text-white tracking-widest">
+              Phase {index + 1} / {project.images.length}
+            </div>
+
+            {/* The Slidng Image */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={index}
+                src={project.images[index]}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5 }}
+                className="w-full h-full object-cover"
+                alt="Project visual"
+              />
+            </AnimatePresence>
+
+            {/* Bottom Progress Dials */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+              {project.images.map((_, dotIdx) => (
+                <div 
+                  key={dotIdx} 
+                  className={`h-1 rounded-full transition-all duration-500 ${
+                    dotIdx === index ? "w-8 bg-[#ccff00]" : "w-2 bg-white/30"
+                  }`} 
+                />
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
-            {[
-              {
-                title: "Infrastructure Decay → Protection",
-                desc: "Corrosion control on major bridge assets.",
-                imgBefore:
-                  "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800&grayscale=true",
-                imgAfter:
-                  "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800",
-              },
-              {
-                title: "Generic Shell → Intelligent Space",
-                desc: "Digital fit-out and smart coating integration.",
-                imgBefore:
-                  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800&grayscale=true",
-                imgAfter:
-                  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=800",
-              },
-            ].map((gal, i) => (
-              <div key={i} className="space-y-10">
-                <div className="relative rounded-[80px] overflow-hidden aspect-video shadow-2xl group">
-                  <div className="absolute top-8 left-8 z-20 bg-black/80 backdrop-blur-md px-6 py-2 rounded-full text-[9px] font-black uppercase text-white tracking-widest">
-                    Original Condition
-                  </div>
-                  <div className="absolute top-8 right-8 z-20 bg-[#ccff00] px-6 py-2 rounded-full text-[9px] font-black uppercase text-black tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    KAVY Outcome
-                  </div>
-                  <img
-                    src={gal.imgBefore}
-                    className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-1000"
-                    alt="Before"
-                  />
-                  <img
-                    src={gal.imgAfter}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
-                    alt="After"
-                  />
-                </div>
-                <div className="px-10">
-                  <h4 className="font-heading text-3xl font-black italic mb-4 uppercase">
-                    {gal.title}
-                  </h4>
-                  <p className="text-slate-500 font-light italic">{gal.desc}</p>
-                </div>
-              </div>
-            ))}
+          {/* Project Text Info */}
+          <div className="px-10">
+            <h4 className="font-heading text-3xl font-black italic mb-4 uppercase">
+              {project.title}
+            </h4>
+            <p className="text-slate-500 font-light italic leading-relaxed">
+              {project.desc}
+            </p>
           </div>
         </div>
+       );
+    })}
+  </div>
+</div>
       </section>
 
       <section
@@ -2982,7 +3051,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
                   System Registry 04
                 </span>
               </div>
-              <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+              <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic leading-none">
                 PROTECTING <br /> ASSETS.
               </h3>
               <p className="text-slate-400 text-xl font-light leading-relaxed italic">
@@ -3019,17 +3088,17 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
               {
                 t: "Bridge Integrity",
                 d: "Corrosion control on regional span.",
-                img: "https://images.unsplash.com/photo-1545143333-648de10ce35f?auto=format&w=800",
+                img: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&w=1200",
               },
               {
                 t: "Maritime Terminals",
-                d: "High-grade port protective coatings.",
-                img: "https://images.unsplash.com/photo-1530124560676-41bc1275d4d4?auto=format&w=800",
+  d: "High-grade port protective coatings.",
+  img: "./images/w.webp",
               },
               {
                 t: "Railway Network",
                 d: "Standardized signage and platform systems.",
-                img: "https://images.unsplash.com/photo-1473876637954-4b493d59fd97?auto=format&w=800",
+                img: "./images/r.jpg",
               },
             ].map((inf, i) => (
               <div
@@ -3061,7 +3130,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">
+            <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
               LIFESTYLE <br /> <span className="text-slate-300">SYSTEMS.</span>
             </h3>
           </div>
@@ -3124,7 +3193,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[10rem] font-black uppercase tracking-tighter italic">
+            <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
               DATA LOGS.
             </h3>
             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
@@ -3199,7 +3268,7 @@ const FullPortfolioPage = ({ onBack }: { onBack: () => void }) => {
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <div className="w-[1200px] h-[1200px] bg-[#ccff00]/10 rounded-full blur-[150px] absolute -top-[600px] left-1/2 -translate-x-1/2"></div>
         </div>
-        <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10 text-white/10">
+        <h3 className="font-heading text-6xl md:text-[5rem] font-black tracking-tighter uppercase italic leading-[0.9] mb-8 relative z-10 text-white">
           REGIONAL <br /> <span className="text-[#ccff00]">IMPACT.</span>
         </h3>
         <div className="flex flex-col sm:flex-row gap-10 relative z-10">
@@ -3363,12 +3432,12 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
       <section className="bg-black text-white px-8 lg:px-24 py-48 lg:py-72 overflow-hidden relative">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.3 }}
+          animate={{ scale: 1, opacity: 0.7 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 pointer-events-none"
         >
           <img
-            src="https://images.unsplash.com/photo-1503387762-592dea58ef21?auto=format&w=2000"
+            src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&w=2000"
             className="w-full h-full object-cover grayscale"
             alt="Compliance"
           />
@@ -3382,11 +3451,11 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
             <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] mb-12 block italic border-l-4 border-[#ccff00] pl-6">
               GOVERNANCE & STANDARDS
             </span>
-            <h2 className="font-heading font-black text-6xl md:text-[14rem] tracking-tighter leading-[0.7] mb-16 uppercase italic">
-              BUILT TO <br /> <span className="text-white/20">HIGHEST</span>{" "}
+            <h2 className="font-heading font-black text-6xl md:text-[6 rem] tracking-tighter leading-[0.9] mb-16 uppercase italic">
+              BUILT TO <br /> <span className="text-[#ccff00]">HIGHEST</span>{" "}
               <br /> STANDARDS.
             </h2>
-            <p className="text-slate-400 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">
+            <p className="text-slate-400 text-xl md:text-3xl font-light leading-tight max-w-5xl italic">
               Delivered With Accountability. Quality and safety are not
               checkboxes — they are core operating principles.
             </p>
@@ -3413,10 +3482,10 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
                   System Registry 01
                 </span>
               </div>
-              <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+              <h3 className="font-heading text-5xl md:text-6xl font-black uppercase italic leading-none">
                 QUALITY <br /> ASSURANCE.
               </h3>
-              <p className="text-slate-500 text-xl font-light leading-relaxed italic">
+              <p className="text-slate-500 text-1xl font-light leading-relaxed italic">
                 Consistency, Performance & Accountability. KAVY operates a
                 structured QA Framework governing every phase of engagement.
               </p>
@@ -3440,7 +3509,7 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
                 </ul>
               </div>
             </motion.div>
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8 pr-14">
               {[
                 {
                   t: "Design & Specs",
@@ -3501,12 +3570,13 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
           className="flex gap-4 w-max p-4"
         >
           {[
+            "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&w=800", // New: Technical Research
+            "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&w=800", // New: Heavy Industry/Maintenance
             "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&w=800",
             "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800",
-            "https://images.unsplash.com/photo-1532187863486-abf85810603a?auto=format&w=800",
             "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&w=800",
-            "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&w=800",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800",
+           
+        
           ].map((img, i) => (
             <img
               key={i}
@@ -3532,7 +3602,7 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
                   System Registry 02
                 </span>
               </div>
-              <h3 className="font-heading text-5xl md:text-9xl font-black uppercase italic leading-none">
+              <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic leading-none">
                 PEOPLE FIRST. <br /> ALWAYS.
               </h3>
             </div>
@@ -3610,10 +3680,10 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[12rem] font-black uppercase tracking-tighter italic">
-              GLOBAL <br /> <span className="text-slate-300">BENCHMARK.</span>
+            <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
+              GLOBAL <br /> <span className="text-slate-300 text-[#ccff00]">BENCHMARK.</span>
             </h3>
-            <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
+            <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em] text-[#ccff00]">
               ISO ALIGNMENT & INDUSTRY ACCREDITATIONS
             </p>
           </div>
@@ -3710,7 +3780,7 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
                 System Registry 04
               </span>
             </div>
-            <h3 className="font-heading text-5xl md:text-8xl font-black uppercase italic leading-none">
+            <h3 className="font-heading text-5xl md:text-7xl font-black uppercase italic leading-none">
               REGULATORY <br /> COMPLIANCE.
             </h3>
             <div className="space-y-12">
@@ -3757,7 +3827,7 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32 space-y-10">
-            <h3 className="font-heading text-6xl md:text-[10rem] font-black uppercase tracking-tighter italic">
+            <h3 className="font-heading text-6xl md:text-[5rem] font-black uppercase tracking-tighter italic">
               RISK INTEL.
             </h3>
             <p className="text-slate-400 font-black uppercase text-[12px] tracking-[0.6em]">
@@ -3813,7 +3883,7 @@ const CompliancePage = ({ onBack }: { onBack: () => void }) => {
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <div className="w-[1200px] h-[1200px] bg-[#ccff00]/10 rounded-full blur-[150px] absolute -top-[600px] left-1/2 -translate-x-1/2"></div>
         </div>
-        <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8 relative z-10 text-white/10 text-center">
+        <h3 className="font-heading text-6xl md:text-[6rem] font-black tracking-tighter uppercase italic leading-[0.9] mb-8 relative z-10 text-white text-center">
           TOTAL <br /> <span className="text-[#ccff00]">ACCOUNTABILITY.</span>
         </h3>
         <div className="flex flex-col sm:flex-row gap-10 relative z-10">
@@ -3844,10 +3914,10 @@ const ServicesPage = ({ onBack }: { onBack: () => void }) => (
           <span className="text-[12px] font-black uppercase tracking-[0.6em] text-[#ccff00] bg-black px-8 py-3 rounded-2xl mb-12 inline-block uppercase italic">
             Capability Matrix
           </span>
-          <h2 className="font-heading font-black text-6xl md:text-[12rem] tracking-tighter leading-none mb-16 uppercase italic">
+          <h2 className="font-heading font-black text-6xl md:text-[5rem] tracking-tighter leading-none mb-16 uppercase italic">
             SYSTEMIC <br /> SOLUTIONS.
           </h2>
-          <p className="text-slate-500 text-xl md:text-5xl font-light leading-tight max-w-5xl italic">
+          <p className="text-slate-500 text-xl md:text-1xl font-light leading-tight max-w-5xl italic">
             Integrated asset lifecycle engineering, from advanced simulation to
             high-precision manufacturing.
           </p>
@@ -3855,47 +3925,49 @@ const ServicesPage = ({ onBack }: { onBack: () => void }) => (
       </div>
     </section>
     <div className="space-y-64 py-64 px-6">
-      {FULL_SERVICES.map((serv, i) => (
-        <section
-          id={`serv-${serv.id}`}
-          key={serv.id}
-          className="max-w-7xl mx-auto scroll-mt-24"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-5 space-y-12">
-              <div className="flex items-center gap-8">
-                <div className="p-8 bg-black text-[#ccff00] rounded-[40px] shadow-2xl scale-110">
-                  {serv.icon}
-                </div>
-                <div>
-                  <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
-                    System Code 0{i + 1}
-                  </span>
-                  <h3 className="font-heading text-5xl md:text-7xl font-black uppercase tracking-tight italic">
-                    {serv.title}
-                  </h3>
-                </div>
-              </div>
-              <p className="text-slate-500 text-xl font-light leading-relaxed italic">
-                High-durability engineered solutions designed for the African
-                context.
-              </p>
+  {FULL_SERVICES.map((serv, i) => (
+    <section
+      id={`serv-${serv.id}`}
+      key={serv.id}
+      className="max-w-7xl mx-auto scroll-mt-24"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+        <div className="lg:col-span-6 space-y-12">
+          <div className="flex items-center gap-8">
+            <div className="p-8 bg-black text-[#ccff00] rounded-[40px] shadow-2xl scale-110">
+              {serv.icon}
             </div>
-            <div className="lg:col-span-7">
-              <div className="w-full h-[400px] md:h-[750px] rounded-[100px] overflow-hidden shadow-3xl bg-slate-100 group">
-                <img
-                  src={serv.img}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                  alt={serv.title}
-                />
-              </div>
+            <div>
+              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
+                System Code 0{i + 1}
+              </span>
+              <h3 className="font-heading text-5xl md:text-5xl font-black uppercase tracking-tight italic">
+                {serv.title}
+              </h3>
             </div>
           </div>
-        </section>
-      ))}
-    </div>
+          <p className="text-slate-500 text-xl font-light leading-relaxed italic">
+            High-durability engineered solutions designed for the African
+            context.
+          </p>
+        </div>
+
+        {/* IMAGE COLUMN WITH RIGHT PADDING */}
+        <div className="lg:col-span-6 pr-0 md:pr-12 lg:pr-12"> 
+          <div className="w-full h-[400px] md:h-[650px] rounded-[100px] overflow-hidden shadow-3xl bg-slate-100 group">
+            <img
+              src={serv.img}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+              alt={serv.title}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+</div>
     <section className="py-64 flex flex-col items-center gap-16 text-center bg-black text-white px-8">
-      <h3 className="font-heading text-6xl md:text-[14rem] font-black tracking-tighter uppercase italic leading-[0.7] mb-8">
+      <h3 className="font-heading text-6xl md:text-[6rem] font-black tracking-tighter uppercase italic leading-[0.9] mb-8">
         POWER <br /> OF <span className="text-[#ccff00]">SEVEN.</span>
       </h3>
       <button
