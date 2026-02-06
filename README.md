@@ -8,7 +8,13 @@ This contains everything you need to run your app locally.
 
 View your app in AI Studio: https://ai.studio/apps/drive/1SgOl5OZS5jb5TRl0uq0Jo52KzV-rIuzF
 
-## Run Locally
+## Deployment
+
+This site is optimized for deployment on **Render** (Free Tier). 
+
+For a detailed step-by-step guide on how to host this site, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
+
+## Development
 
 **Prerequisites:**  Node.js
 
